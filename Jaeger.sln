@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{9A6F6C7F-3207-4FCB-B798-3CCAEB4DBE07}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logic", "Logic", "{C50AE794-37E6-4CB5-9299-F9CD9529FA83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JaegerUI", "JaegerUI\JaegerUI.csproj", "{9ECEE89F-578B-4510-B772-4CAF0579EE95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JaegerLogic", "JaegerLogic\JaegerLogic.csproj", "{095D6953-43D9-444D-8809-6204147F07F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ECEE89F-578B-4510-B772-4CAF0579EE95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECEE89F-578B-4510-B772-4CAF0579EE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECEE89F-578B-4510-B772-4CAF0579EE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECEE89F-578B-4510-B772-4CAF0579EE95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{095D6953-43D9-444D-8809-6204147F07F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{095D6953-43D9-444D-8809-6204147F07F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{095D6953-43D9-444D-8809-6204147F07F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{095D6953-43D9-444D-8809-6204147F07F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9ECEE89F-578B-4510-B772-4CAF0579EE95} = {9A6F6C7F-3207-4FCB-B798-3CCAEB4DBE07}
+		{095D6953-43D9-444D-8809-6204147F07F5} = {C50AE794-37E6-4CB5-9299-F9CD9529FA83}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5811E78-DC0C-4ECB-922D-BEF3A6CBD870}
+	EndGlobalSection
+EndGlobal

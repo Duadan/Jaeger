@@ -1,0 +1,49 @@
+﻿<Window x:Class="JaegerUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JaegerUI"
+        mc:Ignorable="d"
+        DataContext="{Binding Main,Source={StaticResource Locator}}"
+        Title="{Binding WindowTitle, Mode=OneWay}" Height="450" Width="800" MinHeight="450" MinWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#4F772D">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="LogoKimmeUndKorn.png"/>
+            <Label Grid.Column="1" Content="Jägerorganisator" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="32"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="BtnHunter" Content="Jäger"/>
+            <Button Grid.Column="1" x:Name="BtnAppointments" Content="Termine"/>
+            <Button Grid.Column="2" x:Name="BtnInvitation" Content="Einladungen"/>
+            <Button Grid.Column="3" x:Name="BtnKillList" Content="Abschussliste"/>
+            <Button Grid.Column="4" x:Name="BtnAccident" Content="Unfälle"/>
+            <Button Grid.Column="5" x:Name="BtnAnimal" Content="Tiere"/>
+            <Button Grid.Column="6" x:Name="BtnDocs" Content="Dokumente"/>
+            <Button Grid.Column="7" x:Name="BtnCertificate" Content="Urkunden"/>
+            <Button Grid.Column="8" x:Name="BtnPassword" Content="Passwort"/>
+        </Grid>
+        <ContentControl Grid.Row="2" x:Name="CtrlMainWindow"/>
+    </Grid>
+</Window>

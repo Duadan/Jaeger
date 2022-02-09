@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="JaegerUI.HunterAddEditUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:JaegerUI"
+             mc:Ignorable="d" 
+             d:DesignHeight="305" d:DesignWidth="800"
+             DataContext="{Binding HunterAddEditUC,Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Anrede*"/>
+            <ComboBox Grid.Row="1" x:Name="CBformOfAdress"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Vorname*"/>
+            <TextBox Grid.Row="1" x:Name="TxtFirstName" Text="{Binding Name}"/>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="DPGeburtsdatum*"/>
+            <DatePicker Grid.Row="1" x:Name="birthday"/>
+        </Grid>
+            <Grid Grid.Row="3" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Aufgabe/Funktion*"/>
+            <ComboBox Grid.Row="1" x:Name="CBTask"/>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Straße/Hausnummer*"/>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="TxtStreet" Grid.Column="0"/>
+                <TextBox x:Name="TxtNumber" Grid.Column="1"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="5" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Adresszusatz"/>
+            <TextBox Grid.Row="1" x:Name="TxtExtra"/>
+        </Grid>
+        <Grid Grid.Row="6" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="PLZ*"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="Ort*"/>
+            <TextBox Grid.Row="1" Grid.Column="0" x:Name="TxtPLZ"/>
+            <TextBox Grid.Row="1" Grid.Column="1" x:Name="TxtTown"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Nachname*"/>
+            <TextBox Grid.Row="1" x:Name="TxtLastName"/>
+        </Grid>
+        <Grid Grid.Row="3" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Telefonnummer*"/>
+            <TextBox Grid.Row="1" x:Name="TxTTel1"/>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Telefonnummer2"/>
+            <TextBox Grid.Row="1" x:Name="TxTTel2"/>
+        </Grid>
+        <Grid Grid.Row="5" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Telefonnummer3"/>
+            <TextBox Grid.Row="1" x:Name="TxTTel3"/>
+        </Grid>
+        <Grid Grid.Row="6" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Email-Adresse"/>
+            <TextBox Grid.Row="1" x:Name="TxTEmail"/>
+        </Grid>
+        <Button Grid.Column="2" Grid.Row="6" x:Name="BtnConfirm" Content="Bestätigen"/>
+        <Button Grid.Column="3" Grid.Row="6" x:Name="BtnCancel" Content="Abbrechen"/>
+    </Grid>
+</UserControl>
