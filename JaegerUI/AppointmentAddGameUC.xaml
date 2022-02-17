@@ -7,7 +7,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="340" d:DesignWidth="800"
              DataContext="{Binding AppointmentAddGameUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
-    <Grid>
-            
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="ListHunter" Grid.Column="0" Margin="0,0,5,0"/>
+        <DataGrid Grid.Column="1" Margin="5,0,0,0">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn/>
+                <DataGridTextColumn/>
+                <DataGridCheckBoxColumn/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Column="3">
+            <DataGrid.Columns>
+                <DataGridTextColumn/><!--Jäger-->
+                <DataGridTextColumn/><!--Tier-->
+                <DataGridTextColumn/><!--Datum-->
+                <DataGridCheckBoxColumn/><!--löschen Button-->
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="BtnConfirm" Content="Bestätigen" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="30" Width="75" Grid.Column="1" Grid.Row="1" Background="#FFE0CBA8" />
+        <Button x:Name="BtnCancel" Content="Abbrechen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="75" Grid.Column="3" Grid.Row="1" Background="#FFE0CBA8"/>
     </Grid>
 </UserControl>

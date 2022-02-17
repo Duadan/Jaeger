@@ -15,30 +15,32 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Margin="0,0,5,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="55"/>
-                <RowDefinition Height="75"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="85"/>
+                <RowDefinition Height="65"/>
                 <RowDefinition Height="45"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
-                <Label/>
-                <Label Content="Bezeichnung"/>
-                <TextBox x:Name="TxtName"/>
+                <Label Content="Bezeichnung" FontSize="16"/>
+                <TextBox x:Name="TxtName" Height="25" VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Row="1">
-                <Label Content="Beginn"/>
-                <DatePicker x:Name="DPStartDate"/>
-                <Label/>
-                <TextBox Text="Uhrzeit WiP"/>
+                <Label Content="Beginn" FontSize="16"/>
+                <DatePicker x:Name="DPStartDate" Height="25" VerticalContentAlignment="Center"/>
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="CBHrs" Height="25" Width="70" VerticalContentAlignment="Center"/>
+                    <Label Width="5"/>
+                    <ComboBox x:Name="CBMin" Height="25" Width="70" VerticalContentAlignment="Center"/>
+                </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2">
-                <Label Content="Ort"/>
-                <TextBox x:Name="TxtPlace"/>
+                <Label Content="Ort" FontSize="16"/>
+                <TextBox x:Name="TxtPlace" Height="25" VerticalContentAlignment="Center"/>
             </StackPanel>
             <StackPanel Grid.Row="3">
-                <RadioButton x:Name="RBHunt" Content="Jagd"/>
-                <RadioButton x:Name="RBNoHunt" Content="Andere"/>
+                <RadioButton x:Name="RBHunt" Content="Jagd" FontSize="16"/>
+                <RadioButton x:Name="RBNoHunt" Content="Andere" FontSize="16"/>
             </StackPanel>
         </Grid>
         <DataGrid Grid.Column="1" Margin="5,0,0,0">

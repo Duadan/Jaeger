@@ -23,6 +23,27 @@ namespace JaegerUI
         public AppointmentsUC()
         {
             InitializeComponent();
+            CtrlAppointment.Content = new AppointmentCalendarUC();
+        }
+
+        private void BtnInfo_Click(object sender, RoutedEventArgs e)
+        {
+            CtrlAppointment.Content = new AppointmentInfoUC();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CtrlAppointment.Content = new AppointmentAddEditUC();
+        }
+
+        private void BtnCertificate_Click(object sender, RoutedEventArgs e)
+        {
+            CtrlAppointment.Content = new AppointmentCertificateUC();
+        }
+
+        private void BtnGame_Click(object sender, RoutedEventArgs e)
+        {
+            CtrlAppointment.Content = new AppointmentAddGameUC();
         }
     }
 }

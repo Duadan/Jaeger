@@ -35,21 +35,26 @@
             </Grid.RowDefinitions>
             <Label Content="Termine"/>
             <DataGrid Grid.Row="1">
-            <DataGrid.Columns>
-                <DataGridTextColumn/><!--Datum-->
-                <DataGridTextColumn/><!--Uhrzeit-->
-                <DataGridTextColumn/><!--Name/Bezeichnung-->
-                <DataGridCheckBoxColumn/> <!--bearbeiten-->
-                <DataGridCheckBoxColumn/>
-                    <DataGridTemplateColumn/> <!--löschen-->
-            </DataGrid.Columns>
-        </DataGrid>
-            <Button Grid.Row="2" Content="erstellen" Margin="0,0,0,5" Height="30" Background="#FFE0CBA8"/>
+                <DataGrid.Columns>
+                    <DataGridTextColumn/>
+                    <!--Datum-->
+                    <DataGridTextColumn/>
+                    <!--Uhrzeit-->
+                    <DataGridTextColumn/>
+                    <!--Name/Bezeichnung-->
+                    <DataGridCheckBoxColumn/>
+                    <!--bearbeiten-->
+                    <DataGridCheckBoxColumn/>
+                    <DataGridTemplateColumn/>
+                    <!--löschen-->
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Grid.Row="2" Content="erstellen" Margin="0,0,0,5" Height="30" Background="#FFE0CBA8" Click="Button_Click"/>
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="25,5,0,0">
-            <Button x:Name="BtnInfo" Content="Anzeigen" Height="30" Background="#FFE0CBA8"/>
-            <Button x:Name="BtnCertificate" Content="Urkunden" Height="30" Background="#FFE0CBA8"/>
-            <Button x:Name="BtnGame" Content="Abschüsse" Height="30" Background="#FFE0CBA8"/>
+            <Button x:Name="BtnInfo" Content="Anzeigen" Height="30" Background="#FFE0CBA8" Click="BtnInfo_Click"/>
+            <Button x:Name="BtnCertificate" Content="Urkunden" Height="30" Background="#FFE0CBA8" Click="BtnCertificate_Click"/>
+            <Button x:Name="BtnGame" Content="Abschüsse" Background="#FFE0CBA8" Height="30"  Click="BtnGame_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

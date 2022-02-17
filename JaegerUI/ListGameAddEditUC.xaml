@@ -5,8 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JaegerUI"
              mc:Ignorable="d" 
-             d:DesignHeight="340" d:DesignWidth="800" FontFamily="Gill Sans MT">
-    <Grid>
-            
+             d:DesignHeight="320" d:DesignWidth="800" FontFamily="Gill Sans MT">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid>
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn/><!--Auswahl-->
+                <DataGridTextColumn/><!--Tier-->
+                <DataGridTextColumn/><!--Anzahl-->
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Width="125">
+                <Label Content="Jahr" FontSize="16"/>
+                <ComboBox x:Name="CBYear" Height="25"/>
+            </StackPanel>
+        </Grid>
+        <Button x:Name="BtnConfirm" Content="Bestätigen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFE0CBA8" Grid.Row="1" Margin="0,0,90,0" Grid.Column="1" />
+        <Button x:Name="BtnCancel" Content="Abbrchen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Grid.Column="1" Grid.Row="1" Background="#FFE0CBA8" />
     </Grid>
 </UserControl>

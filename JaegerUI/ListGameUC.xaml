@@ -9,8 +9,16 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
+        <DataGrid>
             
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <Label Content="Erstellt am TT.MM.JJJJ" FontSize="16"/>
+            <ComboBox x:Name="CBYear" Height="25"/>
+        </StackPanel>
+        <Button x:Name="BtnEdit" Content="Bearbeiten" Height="30" Background="#FFE0CBA8" Grid.Row="1" HorizontalAlignment="Right" Margin="0,0,150,0"/>
+                <Button x:Name="BtnNew" Content="neu Erstellen" Height="30" Background="#FFE0CBA8" Grid.Row="1" HorizontalAlignment="Right"/>
     </Grid>
 </UserControl>

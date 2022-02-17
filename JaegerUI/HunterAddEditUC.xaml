@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Grid.Row="0" Content="Anrede*" FontSize="16"/>
-            <ComboBox Grid.Row="1" x:Name="CBformOfAdress" Height="25"/>
+            <ComboBox Grid.Row="1" x:Name="CBformOfAdress" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <Label Grid.Row="0" Content="Vorname*" FontSize="16"/>
@@ -35,11 +35,11 @@
         </StackPanel>
         <StackPanel Grid.Row="4">
             <Label Grid.Row="0" Content="Geburtsdatum*" FontSize="16"/>
-            <DatePicker Grid.Row="1" x:Name="DPBirthday" Height="25"/>
+            <DatePicker Grid.Row="1" x:Name="DPBirthday" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Row="5">
             <Label Grid.Row="0" Content="Aufgabe/Funktion*"/>
-            <ComboBox Grid.Row="1" x:Name="CBTask" Height="25"/>
+            <ComboBox Grid.Row="1" x:Name="CBTask" Height="25" VerticalContentAlignment="Center"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2">
             <Label Grid.Row="0" Content="Straße/Hausnummer*" FontSize="16"/>
