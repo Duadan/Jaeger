@@ -6,11 +6,11 @@
         xmlns:local="clr-namespace:JaegerUI"
         mc:Ignorable="d"
         DataContext="{Binding Main,Source={StaticResource Locator}}"
-        Title="{Binding WindowTitle, Mode=OneWay}" Height="450" Width="800" MinHeight="450" MinWidth="800">
+        Title="{Binding WindowTitle, Mode=OneWay}" Height="450" Width="800" MinHeight="450" MinWidth="800" FontFamily="Gill Sans MT">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="45"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="#4F772D">
@@ -19,8 +19,8 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Source="LogoKimmeUndKorn.png"/>
-            <Label Grid.Column="1" Content="Jägerorganisator" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="32"/>
+            <Image Grid.Column="0" Source="LogoKimmeUndKorn.png" Margin="10,10,0,10" HorizontalAlignment="Left"/>
+            <Label Grid.Column="1" Content="Jägerorganisator" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="32" FontWeight="Bold"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -34,15 +34,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="BtnHunter" Content="Jäger"/>
-            <Button Grid.Column="1" x:Name="BtnAppointments" Content="Termine"/>
-            <Button Grid.Column="2" x:Name="BtnInvitation" Content="Einladungen"/>
-            <Button Grid.Column="3" x:Name="BtnKillList" Content="Abschussliste"/>
-            <Button Grid.Column="4" x:Name="BtnAccident" Content="Unfälle"/>
-            <Button Grid.Column="5" x:Name="BtnAnimal" Content="Tiere"/>
-            <Button Grid.Column="6" x:Name="BtnDocs" Content="Dokumente"/>
-            <Button Grid.Column="7" x:Name="BtnCertificate" Content="Urkunden"/>
-            <Button Grid.Column="8" x:Name="BtnPassword" Content="Passwort"/>
+            <Button Grid.Column="0" x:Name="BtnHunter" Content="Jäger" Background="#FFE0CBA8"/>
+            <Button Grid.Column="1" x:Name="BtnAppointments" Content="Termine" Background="#FFE0CBA8"/>
+            <Button Grid.Column="2" x:Name="BtnInvitation" Content="Einladungen" Background="#FFE0CBA8"/>
+            <Button Grid.Column="3" x:Name="BtnKillList" Content="Abschussliste" Background="#FFE0CBA8"/>
+            <Button Grid.Column="4" x:Name="BtnAccident" Content="Unfälle" Background="#FFE0CBA8"/>
+            <Button Grid.Column="5" x:Name="BtnAnimal" Content="Tiere" Background="#FFE0CBA8"/>
+            <Button Grid.Column="6" x:Name="BtnDocs" Content="Dokumente" Background="#FFE0CBA8"/>
+            <Button Grid.Column="7" x:Name="BtnCertificate" Content="Urkunden" Background="#FFE0CBA8"/>
+            <Button Grid.Column="8" x:Name="BtnPassword" Content="Passwort" Background="#FFE0CBA8"/>
         </Grid>
         <ContentControl Grid.Row="2" x:Name="CtrlMainWindow"/>
     </Grid>

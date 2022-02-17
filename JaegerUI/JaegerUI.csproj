@@ -85,6 +85,9 @@
     <Compile Include="AppointmentAddGameUC.xaml.cs">
       <DependentUpon>AppointmentAddGameUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentCalendarUC.xaml.cs">
+      <DependentUpon>AppointmentCalendarUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AppointmentCertificateUC.xaml.cs">
       <DependentUpon>AppointmentCertificateUC.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AppointmentAddGameUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppointmentCalendarUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,134 +5,87 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JaegerUI"
              mc:Ignorable="d" 
-             d:DesignHeight="305" d:DesignWidth="800"
-             DataContext="{Binding HunterAddEditUC,Source={StaticResource Locator}}">
-    <Grid>
+             d:DesignHeight="320" d:DesignWidth="800"
+             DataContext="{Binding HunterAddEditUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
+    <Grid Margin="5,0,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
+            <ColumnDefinition Width=".1*"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width=".1*"/>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="55"/>
+            <RowDefinition Height="55"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Anrede*"/>
-            <ComboBox Grid.Row="1" x:Name="CBformOfAdress"/>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Vorname*"/>
-            <TextBox Grid.Row="1" x:Name="TxtFirstName" Text="{Binding Name}"/>
-        </Grid>
-        <Grid Grid.Row="2" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="DPGeburtsdatum*"/>
-            <DatePicker Grid.Row="1" x:Name="birthday"/>
-        </Grid>
-            <Grid Grid.Row="3" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label Grid.Row="0" Content="Anrede*" FontSize="16"/>
+            <ComboBox Grid.Row="1" x:Name="CBformOfAdress" Height="25"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Label Grid.Row="0" Content="Vorname*" FontSize="16"/>
+            <TextBox Grid.Row="1" x:Name="TxtFirstName" Text="{Binding Name}" Height="25" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4">
+            <Label Grid.Row="0" Content="Geburtsdatum*" FontSize="16"/>
+            <DatePicker Grid.Row="1" x:Name="DPBirthday" Height="25"/>
+        </StackPanel>
+        <StackPanel Grid.Row="5">
             <Label Grid.Row="0" Content="Aufgabe/Funktion*"/>
-            <ComboBox Grid.Row="1" x:Name="CBTask"/>
-        </Grid>
-        <Grid Grid.Row="4" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Straße/Hausnummer*"/>
+            <ComboBox Grid.Row="1" x:Name="CBTask" Height="25"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="2">
+            <Label Grid.Row="0" Content="Straße/Hausnummer*" FontSize="16"/>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="28*"/>
+                    <ColumnDefinition Width="48*"/>
+                    <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="TxtStreet" Grid.Column="0"/>
-                <TextBox x:Name="TxtNumber" Grid.Column="1"/>
+                <TextBox x:Name="TxtStreet" Grid.Column="0" Grid.ColumnSpan="2" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="TxtNumber" Grid.Column="2" VerticalContentAlignment="Center"/>
             </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <Label Content="Adresszusatz" FontSize="16"/>
+            <TextBox x:Name="TxtExtra" Height="25" VerticalContentAlignment="Center"/>
+        </StackPanel>
+            <Grid Grid.Column="2" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Label Content="PLZ*" Grid.Row="0" FontSize="16"/>
+                <TextBox x:Name="TxtPLZ" Grid.Column="0" Grid.Row="1" Height="25" VerticalContentAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Label Content="Ort*" Grid.Row="0" Grid.Column="1" FontSize="16"/>
+                <TextBox x:Name="TxtTown" Grid.Column="1" Grid.Row="1" Height="25" VerticalContentAlignment="Center"/>
+            </StackPanel>
         </Grid>
-        <Grid Grid.Row="5" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Adresszusatz"/>
-            <TextBox Grid.Row="1" x:Name="TxtExtra"/>
-        </Grid>
-        <Grid Grid.Row="6" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="PLZ*"/>
-            <Label Grid.Row="0" Grid.Column="1" Content="Ort*"/>
-            <TextBox Grid.Row="1" Grid.Column="0" x:Name="TxtPLZ"/>
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="TxtTown"/>
-        </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Nachname*"/>
-            <TextBox Grid.Row="1" x:Name="TxtLastName"/>
-        </Grid>
-        <Grid Grid.Row="3" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Telefonnummer*"/>
-            <TextBox Grid.Row="1" x:Name="TxTTel1"/>
-        </Grid>
-        <Grid Grid.Row="4" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Telefonnummer2"/>
-            <TextBox Grid.Row="1" x:Name="TxTTel2"/>
-        </Grid>
-        <Grid Grid.Row="5" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Telefonnummer3"/>
-            <TextBox Grid.Row="1" x:Name="TxTTel3"/>
-        </Grid>
-        <Grid Grid.Row="6" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="Email-Adresse"/>
-            <TextBox Grid.Row="1" x:Name="TxTEmail"/>
-        </Grid>
-        <Button Grid.Column="2" Grid.Row="6" x:Name="BtnConfirm" Content="Bestätigen"/>
-        <Button Grid.Column="3" Grid.Row="6" x:Name="BtnCancel" Content="Abbrechen"/>
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <Label Content="Nachname*" FontSize="16"/>
+            <TextBox x:Name="TxtLastName" Height="25" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="4" Grid.RowSpan="4">
+            <Label Content="Telefonnummer*" FontSize="16"/>
+            <TextBox x:Name="TxTTel1" Height="25" VerticalContentAlignment="Center"/>
+            <Label Content="Telefonnummer2" FontSize="16"/>
+            <TextBox x:Name="TxTTel2" Height="25" VerticalContentAlignment="Center"/>
+            <Label Content="Telefonnummer3" FontSize="16"/>
+            <TextBox x:Name="TxTTel3" Height="25" VerticalContentAlignment="Center"/>
+            <Label Content="Email-Adresse" FontSize="16"/>
+            <TextBox x:Name="TxTEmail" Height="25" VerticalContentAlignment="Center"/>
+    </StackPanel>
+    <Button Grid.Column="5" Grid.Row="5" x:Name="BtnConfirm" Content="Bestätigen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8" Grid.RowSpan="2"/>
+        <Button Grid.Column="5" Grid.Row="5" x:Name="BtnCancel" Content="Abbrechen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFE0CBA8" Grid.RowSpan="2"/>
     </Grid>
 </UserControl>

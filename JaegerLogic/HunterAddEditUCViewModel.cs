@@ -12,7 +12,7 @@ namespace JaegerLogic
     {
         public HunterAddEditUCViewModel()
         {
-            Name = "Ove";
+            Name = "genaU";
         }
         private string _Name;
         public string Name

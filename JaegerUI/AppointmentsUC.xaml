@@ -5,9 +5,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JaegerUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{Binding AppointmentsUC,Source={StaticResource Locator}}">
+             d:DesignHeight="340" d:DesignWidth="800"
+             DataContext="{Binding AppointmentsUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
     <Grid>
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="1" Grid.Column="1" x:Name="CtrlAppointment"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnAll" Content="Alle" Grid.Column="0" Margin="5,5,0,0" Height="30" Background="#FFE0CBA8"/>
+            <Button x:Name="BtnHunt" Content="Jagden" Grid.Column="1" Margin="0,5,0,0" Height="30" Background="#FFE0CBA8"/>
+            <Button x:Name="BtnOther" Content="Andere" Grid.Column="2" Margin="0,5,5,0" Height="30" Background="#FFE0CBA8"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="5,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Label Content="Termine"/>
+            <DataGrid Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn/><!--Datum-->
+                <DataGridTextColumn/><!--Uhrzeit-->
+                <DataGridTextColumn/><!--Name/Bezeichnung-->
+                <DataGridCheckBoxColumn/> <!--bearbeiten-->
+                <DataGridCheckBoxColumn/>
+                    <DataGridTemplateColumn/> <!--löschen-->
+            </DataGrid.Columns>
+        </DataGrid>
+            <Button Grid.Row="2" Content="erstellen" Margin="0,0,0,5" Height="30" Background="#FFE0CBA8"/>
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="25,5,0,0">
+            <Button x:Name="BtnInfo" Content="Anzeigen" Height="30" Background="#FFE0CBA8"/>
+            <Button x:Name="BtnCertificate" Content="Urkunden" Height="30" Background="#FFE0CBA8"/>
+            <Button x:Name="BtnGame" Content="Abschüsse" Height="30" Background="#FFE0CBA8"/>
+        </StackPanel>
     </Grid>
 </UserControl>

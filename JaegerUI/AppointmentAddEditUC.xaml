@@ -5,9 +5,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JaegerUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{Binding AppointmentAddEditUC,Source={StaticResource Locator}}">
-    <Grid>
-            
+             d:DesignHeight="300" d:DesignWidth="800"
+             DataContext="{Binding AppointmentAddEditUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
+    <Grid Margin="5,0,5,5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition MinWidth="175"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Margin="0,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="75"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <Label/>
+                <Label Content="Bezeichnung"/>
+                <TextBox x:Name="TxtName"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <Label Content="Beginn"/>
+                <DatePicker x:Name="DPStartDate"/>
+                <Label/>
+                <TextBox Text="Uhrzeit WiP"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2">
+                <Label Content="Ort"/>
+                <TextBox x:Name="TxtPlace"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3">
+                <RadioButton x:Name="RBHunt" Content="Jagd"/>
+                <RadioButton x:Name="RBNoHunt" Content="Andere"/>
+            </StackPanel>
+        </Grid>
+        <DataGrid Grid.Column="1" Margin="5,0,0,0">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn/>
+                <DataGridTextColumn/>
+                <DataGridComboBoxColumn/>
+                <DataGridTemplateColumn/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="BtnCancel" Content="Abbrechen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Background="#FFE0CBA8"/>
+        <Button x:Name="BtnConfirm" Content="Bestätigen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8"/>
     </Grid>
 </UserControl>

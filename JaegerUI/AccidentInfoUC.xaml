@@ -5,9 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JaegerUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{Binding AccidentInfoUC,Source={StaticResource Locator}}">
-    <Grid>
-            
+             d:DesignHeight="320" d:DesignWidth="800"
+             DataContext="{Binding AccidentInfoUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <ListBox/>
+        <StackPanel Grid.Column="1">
+            <Label/>
+            <Label x:Name="LblPlace" Content="Ort" FontSize="16" HorizontalAlignment="Center"/>
+            <Label/>
+            <Label x:Name="LblDate" Content="Datum" FontSize="16" HorizontalAlignment="Center"/>
+            <Label/>
+            <Label x:Name="LblAnimal" Content="Tier" FontSize="16" HorizontalAlignment="Center"/>
+        </StackPanel>
+        <Button x:Name="BtnAdd" Content="Unfall eintragen" Width="90" Height="30" VerticalAlignment="Bottom" Grid.Column="1" Background="#FFE0CBA8"/>
     </Grid>
 </UserControl>

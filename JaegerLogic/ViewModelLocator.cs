@@ -61,6 +61,7 @@ namespace JaegerUI.ViewModel
             SimpleIoc.Default.Register<AnimalListUCViewModel>();
             SimpleIoc.Default.Register<ListGameUCViewModel>();
             SimpleIoc.Default.Register<ListGameAddEditUCViewModel>();
+            SimpleIoc.Default.Register<AppointmentCalendarUCViewModel>();
         }
         public HunterAddEditUCViewModel HunterAddEditUC
         {
@@ -125,6 +126,13 @@ namespace JaegerUI.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<AppointmentInfoUCViewModel>();
+            }
+        }
+        public AppointmentCalendarUCViewModel AppointmentCalendarUC
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AppointmentCalendarUCViewModel>();
             }
         }
         public HunterInfoUCViewModel HunterInfoUC

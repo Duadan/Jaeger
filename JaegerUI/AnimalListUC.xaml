@@ -5,8 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:JaegerUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="320" d:DesignWidth="800">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="ListAnimal" Grid.Column="0">
+            <DataGrid.Columns>
+                <DataGridTextColumn/>
+                <DataGridCheckBoxColumn/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+            <Label Content="Tierart" FontSize="16" HorizontalAlignment="Center"/>
+            <TextBox x:Name="TxtAnimal" Height="25" Width="100"/>
+            <Label/>
+            <Button x:Name="BtnAnimal" Content="Hinzufügen" Height="30" Width="100" VerticalContentAlignment="Center" Background="#FFE0CBA8"/>
+        </StackPanel>
+        <Button x:Name="BtnInvite" Content="Bestätigen" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFe0CBA8" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,90,0" />
+        <Button x:Name="BtnCancel" Content="Abbrechen" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFe0CBA8" Grid.Column="2" HorizontalAlignment="Right"/>
     </Grid>
 </UserControl>
