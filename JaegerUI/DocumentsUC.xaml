@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="340" d:DesignWidth="800"
              DataContext="{Binding DocumentsUC, Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
-    <Grid Margin="5,0,5,5">
+    <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="175"/>
             <ColumnDefinition/>
@@ -16,13 +16,13 @@
             <RowDefinition/>
             <RowDefinition Height="45"/>
         </Grid.RowDefinitions>
-        <DataGrid>
+        <DataGrid ItemsSource="{Binding ListDocuments}">
             <DataGrid.Columns>
                 <DataGridTextColumn/>
                 <DataGridCheckBoxColumn/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnAdd" Height="30" Background="#FFE0CBA8" Grid.Row="1" Content="Hinzufügen"/>
-        <Button x:Name="BtnEdit" Height="30" Width="75" Background="#FFE0CBA8" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Content="Bearbeiten"/>
+        <Button x:Name="BtnAdd" Height="30" Background="#FFE0CBA8" Grid.Row="1" Content="Hinzufügen" Command="{Binding DocumentAdd}"/>
+        <Button x:Name="BtnEdit" Height="30" Width="75" Background="#FFE0CBA8" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Content="Bearbeiten" Command="{Binding DocumentEdit}"/>
     </Grid>
 </UserControl>

@@ -24,5 +24,10 @@ namespace JaegerUI
         {
             InitializeComponent();
         }
+
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            CtrlAccidentInfo.Content = new AccidentAddUC();
+        }
     }
 }

@@ -26,20 +26,20 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <Label Content="Benutzername"/>
-                <TextBox x:Name="userName"/>
+                <TextBox x:Name="userName" Height="25"/>
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <Label Content="Passwort"/>
-            <PasswordBox x:Name="password"/>
+            <PasswordBox x:Name="password" Height="25"/>
         </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition />
+                <RowDefinition Height="30"/>
+                <RowDefinition />
             </Grid.RowDefinitions>
-            <Button Grid.Row="1" x:Name="BtnLogin" Content="Bestätigen"/>
+            <Button Grid.Row="1" x:Name="BtnLogin" Content="Bestätigen" Background="#FFE0CBA8" Height="30"/>
         </Grid>
     </Grid>
 </UserControl>

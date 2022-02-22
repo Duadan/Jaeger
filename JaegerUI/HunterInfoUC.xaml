@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="340" d:DesignWidth="800"
              DataContext="{Binding HunterInfoUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
-    <Grid Margin="5,0,5,5">
+    <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width=".7*"/>
@@ -17,7 +17,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <DataGrid x:Name="LBHunter" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5">
             <DataGrid.Columns>
@@ -26,7 +26,7 @@
                 <DataGridCheckBoxColumn/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnAdd" Content="Hinzufügen" Grid.Row="1" Background="#FFE0CBA8" Height="30"/>
+        <Button x:Name="BtnAdd" Content="Hinzufügen" Grid.Row="1" Background="#FFE0CBA8" Height="30" Command="{Binding AddHunter}"/>
         <Grid Grid.Row="0" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition/><!--Anrede-->
@@ -39,19 +39,19 @@
                 <RowDefinition/><!--tel3-->
                 <RowDefinition/><!--mail-->
             </Grid.RowDefinitions>
-            <Label Content="Anrede"/>
+            <Label Content="{Binding FormOfAdress}"/>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Label Content="Vorname"/>
-                <Label Content="Nachname"/>
+                <Label Content="{Binding FirstName}"/>
+                <Label Content="{Binding LastName}"/>
             </StackPanel>
-            <Label Content="Funktion" Grid.Row="2"/>
-                <Label Content="Straße+Hausnr+Zusatz" Grid.Row="3"/>
-                <Label Content="PLZ Ort" Grid.Row="4"/>
-            <Label Grid.Row="5" Content="Telefonnummer1" Grid.RowSpan="4"/>
-            <Label Grid.Row="6" Content="Telefonnummer2"/>
-            <Label Grid.Row="7" Content="Telefonnummer3"/>
-            <Label Grid.Row="8" Content="Email"/>
+            <Label Content="{Binding Function}" Grid.Row="2"/>
+                <Label Content="{Binding Adress}" Grid.Row="3"/>
+                <Label Content="{Binding Place}" Grid.Row="4"/>
+            <Label Grid.Row="5" Content="{Binding Phone1}"/>
+            <Label Grid.Row="6" Content="{Binding Phone2}"/>
+            <Label Grid.Row="7" Content="{Binding Phone3}"/>
+            <Label Grid.Row="8" Content="{Binding Email}"/>
         </Grid>
-        <Button x:Name="BtnEdit" Content="Bearbeiten" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="1" Width="75" Height="30" Background="#FFE0CBA8"/>
+        <Button x:Name="BtnEdit" Content="Bearbeiten" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="3" Grid.Row="1" Width="75" Height="30" Background="#FFE0CBA8" Command="{Binding EditHunter}"/>
     </Grid>
 </UserControl>

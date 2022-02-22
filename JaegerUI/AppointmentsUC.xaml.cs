@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using JaegerLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,26 +26,27 @@ namespace JaegerUI
         {
             InitializeComponent();
             CtrlAppointment.Content = new AppointmentCalendarUC();
-        }
-
-        private void BtnInfo_Click(object sender, RoutedEventArgs e)
-        {
-            CtrlAppointment.Content = new AppointmentInfoUC();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            CtrlAppointment.Content = new AppointmentAddEditUC();
-        }
-
-        private void BtnCertificate_Click(object sender, RoutedEventArgs e)
-        {
-            CtrlAppointment.Content = new AppointmentCertificateUC();
-        }
-
-        private void BtnGame_Click(object sender, RoutedEventArgs e)
-        {
-            CtrlAppointment.Content = new AppointmentAddGameUC();
+            Messenger.Default.Register<MainContentChangeMessage>(this, (MainContentChangeMessage message) =>
+            {
+                switch (message.Control)
+                {
+                    case "AppointmentInfoUC":
+                        CtrlAppointment.Content = new AppointmentInfoUC();
+                        break;
+                    case "AppointmentAddEditUC":
+                        CtrlAppointment.Content = new AppointmentAddEditUC();//ID oder so mitgeben
+                        break;
+                    case "AppointmentCertificateUC":
+                        CtrlAppointment.Content = new AppointmentCertificateUC();
+                        break;
+                    case "AppointmentAddGameUC":
+                        CtrlAppointment.Content = new AppointmentAddGameUC();
+                        break;
+                    case "AppointmentCalendarUC":
+                        CtrlAppointment.Content = new AppointmentCalendarUC();
+                        break;
+                }
+            });
         }
     }
 }

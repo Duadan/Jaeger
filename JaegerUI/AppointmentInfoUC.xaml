@@ -22,19 +22,19 @@
         <ListBox/>
         <StackPanel Grid.Column="2" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal">
-                <Label Content="Bezeichnung" FontSize="16"/>
-                <Label Content="Ort" FontSize="16"/>
+                <Label Content="{Binding Name}" FontSize="16"/>
+                <Label Content="{Binding Place}" FontSize="16"/>
             </StackPanel>
             <Label Content="Anzahl Gäste" FontSize="16"/>
-            <Label Content="n" FontSize="16"/>
+            <Label Content="{Binding CountGuests}" FontSize="16"/>
             <Label Height="20"/>
             <Label Content="Anzahl Jäger" FontSize="16"/>
-            <Label Content="m" FontSize="16"/>
+            <Label Content="{Binding CountHunter}" FontSize="16"/>
             <Label Content="Anzahl Treiber" FontSize="16"/>
-            <Label Content="l" FontSize="16"/>
+            <Label Content="{Binding CountBeater}" FontSize="16"/>
         </StackPanel>
         <ListBox x:Name="ListGame" Grid.Column="4"/>
-        <Button x:Name="BtnAddGame" Content="Hinzufügen" Grid.Column="4" Grid.Row="1" Height="30" Width="75" Background="#FFE0CBA8"/>
-        <Button x:Name="BtnEdit" Content="Bearbeiten" Grid.Column="3" Grid.Row="1" Height="30" Width="75" Background="#FFE0CBA8"/>
+        <Button x:Name="BtnAddGame" Content="Hinzufügen" Grid.Column="4" Grid.Row="1" Height="30" Width="75" Background="#FFE0CBA8" Command="{Binding AppointmentInfoAddGame}"/>
+        <Button x:Name="BtnEdit" Content="Bearbeiten" Grid.Column="3" Grid.Row="1" Height="30" Width="75" Background="#FFE0CBA8" Command="{Binding AppointmentInfoEdit}"/>
     </Grid>
 </UserControl>

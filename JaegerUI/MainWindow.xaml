@@ -34,15 +34,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="BtnHunter" Content="Jäger" Background="#FFE0CBA8"/>
-            <Button Grid.Column="1" x:Name="BtnAppointments" Content="Termine" Background="#FFE0CBA8"/>
-            <Button Grid.Column="2" x:Name="BtnInvitation" Content="Einladungen" Background="#FFE0CBA8"/>
-            <Button Grid.Column="3" x:Name="BtnKillList" Content="Abschussliste" Background="#FFE0CBA8"/>
-            <Button Grid.Column="4" x:Name="BtnAccident" Content="Unfälle" Background="#FFE0CBA8"/>
-            <Button Grid.Column="5" x:Name="BtnAnimal" Content="Tiere" Background="#FFE0CBA8"/>
-            <Button Grid.Column="6" x:Name="BtnDocs" Content="Dokumente" Background="#FFE0CBA8"/>
-            <Button Grid.Column="7" x:Name="BtnCertificate" Content="Urkunden" Background="#FFE0CBA8"/>
-            <Button Grid.Column="8" x:Name="BtnPassword" Content="Passwort" Background="#FFE0CBA8"/>
+            <Button Grid.Column="0" x:Name="BtnHunter" Content="Jäger" Background="#FFE0CBA8" Command="{Binding HunterInfoShow}" /><!-- Click="BtnHunter_Click"-->
+            <Button Grid.Column="1" x:Name="BtnAppointments" Content="Termine" Background="#FFE0CBA8" Command="{Binding AppointmentsUC}"/>
+            <Button Grid.Column="2" x:Name="BtnInvitation" Content="Einladungen" Background="#FFE0CBA8" Command="{Binding InvitationsUC}"/>
+            <Button Grid.Column="3" x:Name="BtnKillList" Content="Abschussliste" Background="#FFE0CBA8" Command="{Binding ListGameUC}"/>
+            <Button Grid.Column="4" x:Name="BtnAccident" Content="Unfälle" Background="#FFE0CBA8" Command="{Binding AccidentInfo}"/>
+            <Button Grid.Column="5" x:Name="BtnAnimal" Content="Tiere" Background="#FFE0CBA8" Command="{Binding AnimalListUC}"/>
+            <Button Grid.Column="6" x:Name="BtnDocs" Content="Dokumente" Background="#FFE0CBA8" Command="{Binding DocumentsUC}"/>
+            <Button Grid.Column="7" x:Name="BtnCertificate" Content="Urkunden" Background="#FFE0CBA8" Command="{Binding CertificateUC}"/>
+            <Button Grid.Column="8" x:Name="BtnPassword" Content="Passwort" Background="#FFE0CBA8" Command="{Binding ChangePasswordUC}"/>
         </Grid>
         <ContentControl Grid.Row="2" x:Name="CtrlMainWindow"/>
     </Grid>

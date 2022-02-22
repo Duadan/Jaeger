@@ -23,24 +23,24 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <Label Content="Bezeichnung" FontSize="16"/>
-                <TextBox x:Name="TxtName" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="TxtName" Height="25" VerticalContentAlignment="Center" Text="{Binding Name}"/>
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <Label Content="Beginn" FontSize="16"/>
-                <DatePicker x:Name="DPStartDate" Height="25" VerticalContentAlignment="Center"/>
+                <DatePicker x:Name="DPStartDate" Height="25" VerticalContentAlignment="Center" Text="{Binding Date}"/>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="CBHrs" Height="25" Width="70" VerticalContentAlignment="Center"/>
+                    <ComboBox x:Name="CBHrs" Height="25" Width="70" VerticalContentAlignment="Center" Text="{Binding Hrs}"/>
                     <Label Width="5"/>
-                    <ComboBox x:Name="CBMin" Height="25" Width="70" VerticalContentAlignment="Center"/>
+                    <ComboBox x:Name="CBMin" Height="25" Width="70" VerticalContentAlignment="Center" Text="{Binding Minutes}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <Label Content="Ort" FontSize="16"/>
-                <TextBox x:Name="TxtPlace" Height="25" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="TxtPlace" Height="25" VerticalContentAlignment="Center" Text="{Binding Place}"/>
             </StackPanel>
             <StackPanel Grid.Row="3">
-                <RadioButton x:Name="RBHunt" Content="Jagd" FontSize="16"/>
-                <RadioButton x:Name="RBNoHunt" Content="Andere" FontSize="16"/>
+                <RadioButton x:Name="RBHunt" Content="Jagd" FontSize="16" IsChecked="{Binding AppointmentIsHunt}"/>
+                <RadioButton x:Name="RBNoHunt" Content="Andere" FontSize="16" IsChecked="{Binding AppointmentIsHunt}"/>
             </StackPanel>
         </Grid>
         <DataGrid Grid.Column="1" Margin="5,0,0,0">
@@ -51,7 +51,7 @@
                 <DataGridTemplateColumn/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnCancel" Content="Abbrechen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Background="#FFE0CBA8"/>
-        <Button x:Name="BtnConfirm" Content="Bestätigen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8"/>
+        <Button x:Name="BtnCancel" Content="Abbrechen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Background="#FFE0CBA8" Command="{Binding AppointmentAddEditCancel}"/>
+        <Button x:Name="BtnConfirm" Content="Bestätigen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8" Command="{Binding AppointmentAddEditConfirm}"/>
     </Grid>
 </UserControl>

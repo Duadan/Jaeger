@@ -20,15 +20,15 @@
             <RowDefinition Height="8*"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="1">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding CertificateListHunter}">
             <DataGrid.Columns>
                 <DataGridTextColumn/>
                 <DataGridTextColumn/>
                 <DataGridCheckBoxColumn/>
             </DataGrid.Columns>
         </DataGrid>
-        <ComboBox x:Name="CBChoseCert" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="25"/>
-        <Button x:Name="BtnCancel" Grid.Column="4" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Abbrechen" Width="75" Height="30" Background="#FFE0CBA8"/>
-        <Button x:Name="BtnConfirm" Grid.Column="4" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Bestätigen" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8"/>
+        <ComboBox x:Name="CBChoseCert" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top" Height="25" ItemsSource="{Binding ListCertificates}"/>
+        <Button x:Name="BtnCancel" Grid.Column="4" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Abbrechen" Width="75" Height="30" Background="#FFE0CBA8" Command="{Binding CertificateCancel}"/>
+        <Button x:Name="BtnConfirm" Grid.Column="4" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Content="Bestätigen" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8" Command="{Binding CertificateConfirm}"/>
     </Grid>
 </UserControl>

@@ -7,21 +7,23 @@
              mc:Ignorable="d" 
              d:DesignHeight="320" d:DesignWidth="800"
              DataContext="{Binding AccidentInfoUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
-    <Grid Margin="5">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="150"/>
-        </Grid.ColumnDefinitions>
-        <ListBox/>
-        <StackPanel Grid.Column="1">
-            <Label/>
-            <Label x:Name="LblPlace" Content="Ort" FontSize="16" HorizontalAlignment="Center"/>
-            <Label/>
-            <Label x:Name="LblDate" Content="Datum" FontSize="16" HorizontalAlignment="Center"/>
-            <Label/>
-            <Label x:Name="LblAnimal" Content="Tier" FontSize="16" HorizontalAlignment="Center"/>
-        </StackPanel>
-        <Button x:Name="BtnAdd" Content="Unfall eintragen" Width="90" Height="30" VerticalAlignment="Bottom" Grid.Column="1" Background="#FFE0CBA8"/>
-    </Grid>
+    <ContentControl x:Name="CtrlAccidentInfo">
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <ListBox ItemsSource="{Binding}"/>
+            <StackPanel Grid.Column="1">
+                <Label/>
+                <Label x:Name="LblPlace" Content="{Binding Place}" FontSize="16" HorizontalAlignment="Center"/>
+                <Label/>
+                <Label x:Name="LblDate" Content="{Binding Date}" FontSize="16" HorizontalAlignment="Center"/>
+                <Label/>
+                <Label x:Name="LblAnimal" Content="{Binding Animal}" FontSize="16" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <Button x:Name="BtnAdd" Content="Unfall eintragen" Width="90" Height="30" VerticalAlignment="Bottom" Grid.Column="1" Background="#FFE0CBA8" Command="{Binding AccidentInfoAdd}"/>
+        </Grid>
+    </ContentControl>
 </UserControl>
