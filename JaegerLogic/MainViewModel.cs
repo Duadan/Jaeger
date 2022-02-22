@@ -24,6 +24,7 @@ namespace JaegerUI.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
+        //Service serv = new Service();
         public MainViewModel()
         {
             if (IsInDesignMode)
@@ -158,7 +159,7 @@ namespace JaegerUI.ViewModel
                 {
                     _CertificateUC = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("CertificateUC"));
+                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("CertificateUCBtnMain"));
 
                     });
                 }

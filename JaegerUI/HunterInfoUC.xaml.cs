@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using JaegerLogic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,11 @@ namespace JaegerUI
         public HunterInfoUC()
         {
             InitializeComponent();
+        }
+
+        private void LBHunter_Loaded(object sender, RoutedEventArgs e)
+        {
+            Messenger.Default.Send<string>("LBHunterLoaded");
         }
     }
 }

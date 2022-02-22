@@ -45,6 +45,9 @@ namespace JaegerUI
                     case "AppointmentCalendarUC":
                         CtrlAppointment.Content = new AppointmentCalendarUC();
                         break;
+                    case "CertificateUC":
+                        CtrlAppointment.Content = new AppointmentCertificateUC();
+                        break;
                 }
             });
         }

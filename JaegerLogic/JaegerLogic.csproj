@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -63,6 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abschussliste.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
     <Compile Include="AccidentAddUCViewModel.cs" />
     <Compile Include="AccidentInfoUCViewModel.cs" />
     <Compile Include="AnimalListUCViewModel.cs" />
@@ -74,20 +79,88 @@
     <Compile Include="AppointmentsUCViewModel.cs" />
     <Compile Include="ChangePasswordUCViewModel.cs" />
     <Compile Include="DocumentsUCViewModel.cs" />
+    <Compile Include="Dokumente.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
     <Compile Include="HunterAddEditUCViewModel.cs" />
     <Compile Include="HunterInfoUCViewModel.cs" />
     <Compile Include="InvitationsUCViewModel.cs" />
+    <Compile Include="Jaeger.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JaegerDatenBank.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JaegerDatenBank.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JaegerDatenBank.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JaegerDatenBank.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JaegerDatenBank.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Jagderfolge.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
     <Compile Include="ListGameAddEditUCViewModel.cs" />
     <Compile Include="ListGameUCViewModel.cs" />
+    <Compile Include="Login.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
     <Compile Include="LoginUCViewModel.cs" />
     <Compile Include="MainContentChangeMessage.cs" />
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="Passwörter.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Postausgang.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rueckmeldung.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Termine.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tiere.cs">
+      <DependentUpon>JaegerDatenBank.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EntityDeploy Include="JaegerDatenBank.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>JaegerDatenBank.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="JaegerDatenBank.edmx.diagram">
+      <DependentUpon>JaegerDatenBank.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="JaegerDatenBank.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>JaegerDatenBank.Context.cs</LastGenOutput>
+      <DependentUpon>JaegerDatenBank.edmx</DependentUpon>
+    </Content>
+    <Content Include="JaegerDatenBank.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JaegerDatenBank.edmx</DependentUpon>
+      <LastGenOutput>JaegerDatenBank.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

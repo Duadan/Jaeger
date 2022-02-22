@@ -25,7 +25,7 @@ namespace JaegerUI
         public MainWindow()
         {
             InitializeComponent();
-            CtrlMainWindow.Content = new AppointmentsUC();
+            CtrlMainWindow.Content = new LoginUC();
             Messenger.Default.Register<MainContentChangeMessage>(this, (MainContentChangeMessage message) =>
             {
                 switch (message.Control)
@@ -51,7 +51,7 @@ namespace JaegerUI
                     case "DocumentsUC":
                         CtrlMainWindow.Content = new DocumentsUC();
                         break;
-                    case "CertificateUC":
+                    case "CertificateUCBtnMain":
                         AppointmentsUC appointments = new AppointmentsUC();
                         CtrlMainWindow.Content = appointments;
                         appointments.CtrlAppointment.Content = new AppointmentCertificateUC();
@@ -61,6 +61,12 @@ namespace JaegerUI
                         break;
                     case "HunterAddEditUC":
                         CtrlMainWindow.Content = new HunterAddEditUC();
+                        break;
+                    case "AccidentAddUC":
+                        CtrlMainWindow.Content = new AccidentAddUC();
+                        break;
+                    case "ListGameAddEditUC":
+                        CtrlMainWindow.Content = new ListGameAddEditUC();
                         break;
                 }
 

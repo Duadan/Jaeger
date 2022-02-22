@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +11,9 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class HunterInfoUCViewModel:ViewModelBase
+    public class HunterInfoUCViewModel:ViewModelBase,INotifyPropertyChanged
     {
+        private Service serv = new Service();
         public HunterInfoUCViewModel()
         {
             _FormOfAdress = "Anrede";
@@ -24,6 +26,32 @@ namespace JaegerLogic
             _Phone2 = "TelefonNr2";
             _Phone3 = "TelefonNr3";
             _Email = "Email Adresse";
+
+            
+                    _Huntards = serv.GetAllHuntards();
+              
+            
+        }
+        private List<Jaeger> _Huntards;
+        public List<Jaeger> Huntards
+        {
+            get { return _Huntards; }
+            set
+            {
+                _Huntards = value;
+                RaisePropertyChanged("Huntards");
+            }
+        }
+        private Jaeger _SelectedHuntard;
+
+        public Jaeger SelectedHuntard
+        {
+            get { return _SelectedHuntard; }
+            set
+            {
+                _SelectedHuntard = value;
+                RaisePropertyChanged("SelectedHuntard");
+            }
         }
 
         private string _FormOfAdress;
