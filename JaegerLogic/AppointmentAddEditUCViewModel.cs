@@ -12,10 +12,14 @@ namespace JaegerLogic
 {
     public class AppointmentAddEditUCViewModel:ViewModelBase
     {
+        private readonly ServiceAppointments serv = new ServiceAppointments();
         public AppointmentAddEditUCViewModel()
         {
 
         }
+
+        #region Properties
+
         private string _Name;
         public string Name
         {
@@ -64,6 +68,8 @@ namespace JaegerLogic
             get { return _AppointmentHunter; }
             set { _AppointmentHunter = value; }
         }
+
+        #endregion
 
         private ICommand _AppointmentAddEditConfirm;
         public ICommand AppointmentAddEditConfirm

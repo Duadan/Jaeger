@@ -114,6 +114,7 @@
     <Compile Include="LoginUCViewModel.cs" />
     <Compile Include="MainContentChangeMessage.cs" />
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="Partials\Jaeger.cs" />
     <Compile Include="Passwörter.cs">
       <DependentUpon>JaegerDatenBank.tt</DependentUpon>
     </Compile>
@@ -125,6 +126,7 @@
       <DependentUpon>JaegerDatenBank.tt</DependentUpon>
     </Compile>
     <Compile Include="Service.cs" />
+    <Compile Include="ServiceAppointments.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>JaegerDatenBank.tt</DependentUpon>
     </Compile>

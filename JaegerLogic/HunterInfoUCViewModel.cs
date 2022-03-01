@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -11,9 +12,9 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class HunterInfoUCViewModel:ViewModelBase,INotifyPropertyChanged
+    public class HunterInfoUCViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private Service serv = new Service();
+        private readonly Service serv = new Service();
         public HunterInfoUCViewModel()
         {
             _FormOfAdress = "Anrede";
@@ -26,34 +27,32 @@ namespace JaegerLogic
             _Phone2 = "TelefonNr2";
             _Phone3 = "TelefonNr3";
             _Email = "Email Adresse";
+            _Birthday = "Geburtstag";
 
-            
-                    _Huntards = serv.GetAllHuntards();
-              
-            
+            _ExperimentalHunter = serv.GetAllHunters();
         }
-        private List<Jaeger> _Huntards;
-        public List<Jaeger> Huntards
+
+        private Jaeger _SelectedHunter;
+        public Jaeger SelectedHunter
         {
-            get { return _Huntards; }
+            get { return _SelectedHunter; }
             set
             {
-                _Huntards = value;
-                RaisePropertyChanged("Huntards");
-            }
-        }
-        private Jaeger _SelectedHuntard;
-
-        public Jaeger SelectedHuntard
-        {
-            get { return _SelectedHuntard; }
-            set
-            {
-                _SelectedHuntard = value;
-                RaisePropertyChanged("SelectedHuntard");
+                _SelectedHunter = value;
+                RaisePropertyChanged("SelectedHunter");
+                ShowHunterInfo();
             }
         }
 
+        private List<Jaeger> _ExperimentalHunter;
+
+        public List<Jaeger> ExperimentalHunter
+        {
+            get { return _ExperimentalHunter; }
+            set { _ExperimentalHunter = serv.GetAllHunters(); }
+        }
+
+        #region properties
         private string _FormOfAdress;
         public string FormOfAdress
         {
@@ -194,6 +193,19 @@ namespace JaegerLogic
             }
         }
 
+        private string _Birthday;
+        public string Birthday
+        {
+            get { return _Birthday; }
+            set
+            {
+                _Birthday = value;
+                RaisePropertyChanged("Birthday");
+            }
+        }
+
+        #endregion
+
         private ICommand _AddHunter;
         public ICommand AddHunter
         {
@@ -203,6 +215,8 @@ namespace JaegerLogic
                 {
                     _AddHunter = new RelayCommand(() =>
                     {
+                        HunterAddEditUCViewModel hunterAdd = ServiceLocator.Current.GetInstance<HunterAddEditUCViewModel>();
+                        hunterAdd.Edit = false;
                         Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("HunterAddEditUC"));
                     });
                 }
@@ -218,10 +232,53 @@ namespace JaegerLogic
                 {
                     _EditHunter = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("HunterAddEditUC"));
+                        if (SelectedHunter != null)
+                        {
+                            HunterAddEditUCViewModel hunterEdit = ServiceLocator.Current.GetInstance<HunterAddEditUCViewModel>();
+                            hunterEdit.Hunter = SelectedHunter;
+                            hunterEdit.Edit = true;
+                            Messenger.Default.Send(new MainContentChangeMessage("HunterAddEditUC"));
+                        }
                     });
                 }
                 return _EditHunter;
+            }
+        }
+
+        private ICommand _DelHunter;
+        public ICommand DelHunter
+        {
+            get
+            {
+                if (_DelHunter == null)
+                {
+                    _DelHunter = new RelayCommand<int>((ID) =>
+                    {
+
+                        serv.DelHunter(ID);
+
+                    });
+                }
+                return _DelHunter;
+            }
+        }
+
+        private void ShowHunterInfo()
+        {
+
+            FormOfAdress = SelectedHunter.Anrede;
+            FirstName = SelectedHunter.Vorname;
+            LastName = SelectedHunter.Nachname;
+            Function = SelectedHunter.Funktion;
+            Adress = SelectedHunter.Straße + " " + SelectedHunter.Hausnummer + " " + SelectedHunter.Adresszusatz;
+            Place = SelectedHunter.PLZ + " " + SelectedHunter.Ort;
+            Phone1 = SelectedHunter.Telefonnummer1;
+            Phone2 = SelectedHunter.Telefonnummer2;
+            Phone3 = SelectedHunter.Telefonnummer3;
+            Email = SelectedHunter.Email;
+            if (SelectedHunter.Geburtsdatum != null)
+            {
+                Birthday = SelectedHunter.Geburtsdatum.Value.ToString("dd/MM/yyyy");
             }
         }
     }

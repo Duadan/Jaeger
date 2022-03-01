@@ -12,179 +12,98 @@ namespace JaegerLogic
 {
     public class HunterAddEditUCViewModel : ViewModelBase
     {
+        private readonly Service serv = new Service();
+        public bool Edit = false;
         public HunterAddEditUCViewModel()
         {
-            Vorname = "genaU";
+            Hunter = new Jaeger();
+            Testing = new List<Jaeger>();
         }
-        private List<string> _FormOfAdress;
+        
+        #region all the properties
+        private List<string> _FormOfAdress=new List<string> { "Herr","Frau","Divers","Dr."};
         public List<string> FormOfAdress
         {
             get { return _FormOfAdress; }
-            set { _FormOfAdress = value; }
+            set 
+            {
+                _FormOfAdress = value;
+
+            }
         }
 
-        private DateTime _Birthday;
+        private DateTime _Birthday=DateTime.Today;
         public DateTime Birthday
         {
             get { return _Birthday; }
             set { _Birthday = value; }
         }
 
-        private List<string> _Task;
+        private List<string> _Task=new List<string> { "kein Ahnung", "Tut etwas", "Förster" };
         public List<string> Task
         {
             get { return _Task; }
             set { _Task = value; }
         }
 
-        private string _Vorname;
-        public string Vorname
+        private Jaeger _Hunter;
+        public Jaeger Hunter
         {
-            get 
-            { 
-                return _Vorname; 
-            }
+            get { return _Hunter; }
             set
             {
-                _Vorname = value;
-                RaisePropertyChanged("Vorname");
+                _Hunter = value;
             }
         }
 
-        private string _Nachname;
-        public string Nachname
+        private List<Jaeger> _Testing;
+        public List<Jaeger> Testing
+        {
+            get { return _Testing; }
+            set
+            {
+                _Testing = value;
+                RaisePropertyChanged("Testing");
+            }
+        }
+
+        #endregion
+
+        private ICommand _ConfirmHunter;
+        public ICommand ConfirmHunter
         {
             get
             {
-                return _Nachname;
-            }
-            set
-            {
-                _Nachname = value;
-                RaisePropertyChanged("Nachname");
-            }
-        }
-
-        private string _Straße;
-        public string Straße
-        {
-            get
-            {
-                return _Straße;
-            }
-            set
-            {
-                _Straße= value;
-                RaisePropertyChanged("Straße");
-            }
-        }
-
-        private string _HausNr;
-        public string HausNr
-        {
-            get
-            {
-                return _HausNr;
-            }
-            set
-            {
-                _HausNr = value;
-                RaisePropertyChanged("HausNr");
-            }
-        }
-
-        private string _Adresszusatz;
-        public string Addresszusatz
-        {
-            get
-            {
-                return _Adresszusatz;
-            }
-            set
-            {
-                _Adresszusatz = value;
-                RaisePropertyChanged("Adresszusatz");
-            }
-        }
-
-        private string _PLZ;
-        public string PLZ
-        {
-            get
-            {
-                return _PLZ;
-            }
-            set
-            {
-                _PLZ = value;
-                RaisePropertyChanged("PLZ");
-            }
-        }
-
-        private string _Ort;
-        public string Ort
-        {
-            get
-            {
-                return _Ort;
-            }
-            set
-            {
-                _Ort = value;
-                RaisePropertyChanged("Ort");
-            }
-        }
-
-        private string _Email;
-        public string Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                _Email = value;
-                RaisePropertyChanged("Email");
-            }
-        }
-
-        private string _Phone1;
-        public string Phone1
-        {
-            get { return _Phone1; }
-            set { _Phone1 = value; }
-        }
-
-        private string _Phone2;
-        public string Phone2
-        {
-            get { return _Phone2; }
-            set { _Phone2 = value; }
-        }
-
-        private string _Phone3;
-        public string Phone3
-        {
-            get { return _Phone3; }
-            set { _Phone3 = value; }
-        }
-
-        private ICommand _AddHunter;
-        public ICommand AddHunter
-        {
-            get
-            {
-                if (_AddHunter == null)
+                if (_ConfirmHunter == null)
                 {
-                    _AddHunter = new RelayCommand(() =>
-                      {
-                          Email = Vorname;
-                      });
+                    _ConfirmHunter = new RelayCommand(() =>
+                    {
+                        if (!Edit)
+                        {
+                            Hunter.Geburtsdatum = Birthday;
+                            if (Hunter.IsValid())
+                            {
+                                serv.InsertHunter(Hunter);
+                                //Testing.Add(Hunter);
+                                //Testing = Testing;
+                                Hunter = new Jaeger();
+                            }
+                        }
+                        if (Edit)
+                        {
+                            Hunter.Geburtsdatum = Birthday;
+                            if (Hunter.IsValid())
+                            {
+                                serv.UpdateHunter(Hunter);
+                                Hunter = new Jaeger();
+                            }
+                        }
+                    });
                 }
-                return _AddHunter;
+                return _ConfirmHunter;
             }
         }
+
         private ICommand _AddHunterCancel;
         public ICommand AddHunterCancel
         {

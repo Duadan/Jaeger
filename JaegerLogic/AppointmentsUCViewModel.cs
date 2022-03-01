@@ -16,6 +16,9 @@ namespace JaegerLogic
         {
 
         }
+
+        #region Buttons
+
         private ICommand _AppointmentInfoUC;
         public ICommand AppointmentInfoUC
         {
@@ -121,5 +124,16 @@ namespace JaegerLogic
                 return _AppointmentShowOther;
             }
         }
+
+        #endregion
+
+        private List<TerminList> _Appointments;
+
+        public List<TerminList> Appointments
+        {
+            get { return _Appointments; }
+            set { _Appointments = value; }
+        }
+
     }
 }
