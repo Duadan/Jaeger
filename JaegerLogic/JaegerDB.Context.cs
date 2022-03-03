@@ -16,7 +16,7 @@ namespace JaegerLogic
     public partial class JaegerDB : DbContext
     {
         public JaegerDB()
-            : base("name=JaegerDB")
+            : base("name=JaegerTestOSEntities")
         {
         }
     

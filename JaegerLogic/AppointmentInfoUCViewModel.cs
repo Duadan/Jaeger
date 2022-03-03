@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -10,26 +11,53 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class AppointmentInfoUCViewModel:ViewModelBase
+    public class AppointmentInfoUCViewModel : ViewModelBase
     {
+        private readonly ServiceAppointments serv = new ServiceAppointments();
+        private readonly Service servHunter = new Service();
+        //public AppointmentsUCViewModel AppointmentsUC = ServiceLocator.Current.GetInstance<AppointmentsUCViewModel>();
         public AppointmentInfoUCViewModel()
         {
-            _Name = "Bezeichnung";
-            _Place = "Ort";
-        }
-        private string _Name;
-        public string Name
-        {
-            get { return _Name; }
-            set { _Name = value; }
+            //AppointmentsUC = ServiceLocator.Current.GetInstance<AppointmentsUCViewModel>();
+            IsSelected = false;
         }
 
-        private string _Place;
-        public string Place
+        #region properties
+
+        private int _SelectedID;
+        public int SelectedID
         {
-            get { return _Place; }
-            set { _Place = value; }
+            get { return _SelectedID; }
+            set
+            {
+                _SelectedID = value;
+                _AppointmentChosen = serv.SelectedAppointment(SelectedID);
+                if (IsSelected)
+                {
+                    _ListHunter = servHunter.GetSelectedHunter(SelectedID);
+                }
+                RaisePropertyChanged("SelectedID");
+            }
         }
+
+        private Termine _AppointmentChosen;
+        public Termine AppointmentChosen
+        {
+            get { return _AppointmentChosen; }
+            set
+            {
+                //_AppointmentChosen = serv.SelectedAppointment(SelectedID);
+                RaisePropertyChanged("AppointmentChosen");
+            }
+        }
+
+        private bool _IsSelected;
+        public bool IsSelected
+        {
+            get { return _IsSelected; }
+            set { _IsSelected = value; }
+        }
+
 
         private int _CountGuests;
         public int CountGuests
@@ -46,26 +74,44 @@ namespace JaegerLogic
         }
 
         private int _CountBeater;
-
         public int CountBeater
         {
             get { return _CountBeater; }
             set { _CountBeater = value; }
         }
 
-        private List<string> _ListHunter;
-        public List<string> ListHunter
+        private List<Jaeger> _ListHunter;
+        public List<Jaeger> ListHunter
         {
             get { return _ListHunter; }
-            set { _ListHunter = value; }
+            set
+            {
+                _ListHunter = value;
+                RaisePropertyChanged("ListHunter");
+            }
         }
 
-        private List<string> _ListGame;
-        public List<string> ListGame
+        private Jaeger _SelectedHunter;
+
+        public Jaeger SelectedHunter
+        {
+            get { return _SelectedHunter; }
+            set
+            {
+                _SelectedHunter = value;
+                RaisePropertyChanged("SelectedHunter");
+            }
+        }
+
+
+        private List<Game> _ListGame;
+        public List<Game> ListGame
         {
             get { return _ListGame; }
             set { _ListGame = value; }
         }
+
+        #endregion
 
         private ICommand _AppointmentInfoEdit;
         public ICommand AppointmentInfoEdit
@@ -91,6 +137,8 @@ namespace JaegerLogic
                 {
                     _AppointmentInfoAddGame = new RelayCommand(() =>
                     {
+                        AppointmentAddEditUCViewModel edit = ServiceLocator.Current.GetInstance<AppointmentAddEditUCViewModel>();
+                        edit.IsEdit = true;
                         Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentAddGameUC"));
                     });
                 }

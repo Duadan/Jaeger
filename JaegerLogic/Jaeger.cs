@@ -36,7 +36,6 @@ namespace JaegerLogic
         public string Telefonnummer3 { get; set; }
         public string Funktion { get; set; }
         public string Email { get; set; }
-        public string Jagdhunde { get; set; }
         public Nullable<System.DateTime> Geburtsdatum { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

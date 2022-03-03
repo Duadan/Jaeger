@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -12,9 +13,10 @@ namespace JaegerLogic
 {
     public class AppointmentsUCViewModel : ViewModelBase
     {
+        private readonly ServiceAppointments serv = new ServiceAppointments();
         public AppointmentsUCViewModel()
         {
-
+            _Appointments = serv.GetAllAppointments();
         }
 
         #region Buttons
@@ -43,6 +45,8 @@ namespace JaegerLogic
                 {
                     _AppointmentAddEditUC = new RelayCommand(() =>
                     {
+                        AppointmentAddEditUCViewModel edit = ServiceLocator.Current.GetInstance<AppointmentAddEditUCViewModel>();
+                        edit.IsEdit = false;
                         Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentAddEditUC"));
                     });
                 }
@@ -127,13 +131,25 @@ namespace JaegerLogic
 
         #endregion
 
-        private List<TerminList> _Appointments;
-
-        public List<TerminList> Appointments
+        private List<Termine> _Appointments;
+        public List<Termine> Appointments
         {
             get { return _Appointments; }
             set { _Appointments = value; }
         }
 
+        private Termine _SelectedAppointment;
+        public Termine SelectedAppointment
+        {
+            get { return _SelectedAppointment; }
+            set
+            {
+                _SelectedAppointment = value;
+                RaisePropertyChanged("SelectedAppointment");
+                AppointmentInfoUCViewModel bla = ServiceLocator.Current.GetInstance<AppointmentInfoUCViewModel>();
+                bla.SelectedID = value.ID;
+                bla.IsSelected = true;
+            }
+        }
     }
 }

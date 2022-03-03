@@ -34,19 +34,11 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Label Content="Termine"/>
-            <DataGrid Grid.Row="1">
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Appointments, Mode=TwoWay}" SelectedItem="{Binding SelectedAppointment, Mode=TwoWay}" CanUserResizeColumns="True" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn/>
-                    <!--Datum-->
-                    <DataGridTextColumn/>
-                    <!--Uhrzeit-->
-                    <DataGridTextColumn/>
-                    <!--Name/Bezeichnung-->
-                    <DataGridCheckBoxColumn/>
-                    <!--bearbeiten-->
-                    <DataGridCheckBoxColumn/>
-                    <DataGridTemplateColumn/>
-                    <!--löschen-->
+                    <DataGridTextColumn Binding="{Binding Bezeichnung,Mode=OneWay}"/>
+                    <DataGridTextColumn Binding="{Binding DatumUhrzeit,Mode=OneWay}"/>
+                    <DataGridTextColumn Binding="{Binding Typ,Mode=OneWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Grid.Row="2" Content="erstellen" Margin="0,0,0,5" Height="30" Background="#FFE0CBA8" Command="{Binding AppointmentAddEditUC}"/>

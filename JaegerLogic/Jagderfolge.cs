@@ -18,7 +18,6 @@ namespace JaegerLogic
         public int Jaeger_ID { get; set; }
         public int Termine_ID { get; set; }
         public int Tiere_ID { get; set; }
-        public int Abschüsse { get; set; }
     
         public virtual Jaeger Jaeger { get; set; }
         public virtual Termine Termine { get; set; }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JaegerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JaegerTestOSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Abschussliste">
           <Key>
             <PropertyRef Name="ID" />
@@ -40,7 +40,6 @@
           <Property Name="Telefonnummer3" Type="varchar" MaxLength="50" />
           <Property Name="Funktion" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
-          <Property Name="Jagdhunde" Type="varchar" MaxLength="50" />
           <Property Name="Geburtsdatum" Type="date" />
         </EntityType>
         <EntityType Name="Jagderfolge">
@@ -51,7 +50,6 @@
           <Property Name="Jaeger_ID" Type="int" Nullable="false" />
           <Property Name="Termine_ID" Type="int" Nullable="false" />
           <Property Name="Tiere_ID" Type="int" Nullable="false" />
-          <Property Name="Abschüsse" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Login">
           <Key>
@@ -114,7 +112,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Tierart" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Tierart" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="FK_Abschussliste_Tiere">
           <End Role="Tiere" Type="Self.Tiere" Multiplicity="1" />
@@ -224,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="JaegerDBModelStoreContainer">
+        <EntityContainer Name="JaegerTestOSModelStoreContainer">
           <EntitySet Name="Abschussliste" EntityType="Self.Abschussliste" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dokumente" EntityType="Self.Dokumente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jaeger" EntityType="Self.Jaeger" Schema="dbo" store:Type="Tables" />
@@ -277,7 +275,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="JaegerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="JaegerTestOSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Abschussliste">
           <Key>
             <PropertyRef Name="ID" />
@@ -315,7 +313,6 @@
           <Property Name="Telefonnummer3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Funktion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Jagdhunde" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Geburtsdatum" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Jagderfolge" Relationship="Self.FK_Jagderfolge_Jaeger" FromRole="Jaeger" ToRole="Jagderfolge" />
           <NavigationProperty Name="Postausgang" Relationship="Self.FK_Postausgang_Jaeger" FromRole="Jaeger" ToRole="Postausgang" />
@@ -329,7 +326,6 @@
           <Property Name="Jaeger_ID" Type="Int32" Nullable="false" />
           <Property Name="Termine_ID" Type="Int32" Nullable="false" />
           <Property Name="Tiere_ID" Type="Int32" Nullable="false" />
-          <Property Name="Abschüsse" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Jaeger" Relationship="Self.FK_Jagderfolge_Jaeger" FromRole="Jagderfolge" ToRole="Jaeger" />
           <NavigationProperty Name="Termine" Relationship="Self.FK_Jagderfolge_Termine" FromRole="Jagderfolge" ToRole="Termine" />
           <NavigationProperty Name="Tiere" Relationship="Self.FK_Jagderfolge_Tiere" FromRole="Jagderfolge" ToRole="Tiere" />
@@ -403,7 +399,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Tierart" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Tierart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Abschussliste" Relationship="Self.FK_Abschussliste_Tiere" FromRole="Tiere" ToRole="Abschussliste" />
           <NavigationProperty Name="Jagderfolge" Relationship="Self.FK_Jagderfolge_Tiere" FromRole="Tiere" ToRole="Jagderfolge" />
         </EntityType>
@@ -515,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="JaegerDB" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="JaegerTestOSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Abschussliste" EntityType="Self.Abschussliste" />
           <EntitySet Name="Dokumente" EntityType="Self.Dokumente" />
           <EntitySet Name="Jaeger" EntityType="Self.Jaeger" />
@@ -569,9 +565,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="JaegerDBModelStoreContainer" CdmEntityContainer="JaegerDB">
+        <EntityContainerMapping StorageEntityContainer="JaegerTestOSModelStoreContainer" CdmEntityContainer="JaegerTestOSEntities">
           <EntitySetMapping Name="Abschussliste">
-            <EntityTypeMapping TypeName="JaegerDBModel.Abschussliste">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Abschussliste">
               <MappingFragment StoreEntitySet="Abschussliste">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Tiere_ID" ColumnName="Tiere_ID" />
@@ -581,7 +577,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Dokumente">
-            <EntityTypeMapping TypeName="JaegerDBModel.Dokumente">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Dokumente">
               <MappingFragment StoreEntitySet="Dokumente">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
@@ -590,7 +586,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Jaeger">
-            <EntityTypeMapping TypeName="JaegerDBModel.Jaeger">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Jaeger">
               <MappingFragment StoreEntitySet="Jaeger">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Vorname" ColumnName="Vorname" />
@@ -606,24 +602,22 @@
                 <ScalarProperty Name="Telefonnummer3" ColumnName="Telefonnummer3" />
                 <ScalarProperty Name="Funktion" ColumnName="Funktion" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Jagdhunde" ColumnName="Jagdhunde" />
                 <ScalarProperty Name="Geburtsdatum" ColumnName="Geburtsdatum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Jagderfolge">
-            <EntityTypeMapping TypeName="JaegerDBModel.Jagderfolge">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Jagderfolge">
               <MappingFragment StoreEntitySet="Jagderfolge">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Jaeger_ID" ColumnName="Jaeger_ID" />
                 <ScalarProperty Name="Termine_ID" ColumnName="Termine_ID" />
                 <ScalarProperty Name="Tiere_ID" ColumnName="Tiere_ID" />
-                <ScalarProperty Name="Abschüsse" ColumnName="Abschüsse" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Login">
-            <EntityTypeMapping TypeName="JaegerDBModel.Login">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Login">
               <MappingFragment StoreEntitySet="Login">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Loginname" ColumnName="Loginname" />
@@ -632,7 +626,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Passwörter">
-            <EntityTypeMapping TypeName="JaegerDBModel.Passwörter">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Passwörter">
               <MappingFragment StoreEntitySet="Passwörter">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Loginname" ColumnName="Loginname" />
@@ -641,7 +635,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Postausgang">
-            <EntityTypeMapping TypeName="JaegerDBModel.Postausgang">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Postausgang">
               <MappingFragment StoreEntitySet="Postausgang">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Dokumente_ID" ColumnName="Dokumente_ID" />
@@ -652,7 +646,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rueckmeldung">
-            <EntityTypeMapping TypeName="JaegerDBModel.Rueckmeldung">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Rueckmeldung">
               <MappingFragment StoreEntitySet="Rueckmeldung">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Rolle" ColumnName="Rolle" />
@@ -663,7 +657,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="JaegerDBModel.sysdiagrams">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -674,7 +668,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Termine">
-            <EntityTypeMapping TypeName="JaegerDBModel.Termine">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Termine">
               <MappingFragment StoreEntitySet="Termine">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Typ" ColumnName="Typ" />
@@ -685,7 +679,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tiere">
-            <EntityTypeMapping TypeName="JaegerDBModel.Tiere">
+            <EntityTypeMapping TypeName="JaegerTestOSModel.Tiere">
               <MappingFragment StoreEntitySet="Tiere">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Tierart" ColumnName="Tierart" />

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf593f53b2be437fbdded16846bcdff5" Name="Diagram1">
+        <EntityTypeShape EntityType="JaegerTestOSModel.Abschussliste" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Dokumente" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Jaeger" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Jagderfolge" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Login" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Passwörter" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Postausgang" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Rueckmeldung" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Termine" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerTestOSModel.Tiere" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Abschussliste_Tiere" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Postausgang_Dokumente" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Jagderfolge_Jaeger" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Postausgang_Jaeger" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Rueckmeldung_Jaeger" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Jagderfolge_Termine" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Jagderfolge_Tiere" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Postausgang_Termine" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerTestOSModel.FK_Rueckmeldung_Termine" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -19,11 +19,16 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox/>
+        <DataGrid ItemsSource="{Binding ListHunter}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedHunter}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Vorname"  Binding="{Binding Vorname}"/>
+                <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <StackPanel Grid.Column="2" Grid.RowSpan="2">
             <StackPanel Orientation="Horizontal">
-                <Label Content="{Binding Name}" FontSize="16"/>
-                <Label Content="{Binding Place}" FontSize="16"/>
+                <Label Content="{Binding AppointmentChosen.Bezeichnung}" FontSize="16"/>
+                <Label Content="{Binding AppointmentChosen.Ort}" FontSize="16"/>
             </StackPanel>
             <Label Content="Anzahl Gäste" FontSize="16"/>
             <Label Content="{Binding CountGuests}" FontSize="16"/>

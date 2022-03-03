@@ -10,26 +10,43 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class AnimalListUCViewModel:ViewModelBase
+    public class AnimalListUCViewModel : ViewModelBase
     {
+        private readonly ServiceAnimal serv = new ServiceAnimal();
         public AnimalListUCViewModel()
         {
-
+            AnimalList = serv.GetAllAnimals();
         }
 
-        private List<string> _AnimalList;
-        public List<string> AnimalList
+        private List<Tiere> _AnimalList;
+        public List<Tiere> AnimalList
         {
             get { return _AnimalList; }
             set { _AnimalList = value; }
+        }
+
+        private Tiere _SelectedAnimal;
+        public Tiere SelectedAnimal
+        {
+            get { return _SelectedAnimal; }
+            set
+            {
+                _SelectedAnimal = value;
+                RaisePropertyChanged("SelectedAnimal");
+            }
         }
 
         private string _AnimalName;
         public string AnimalName
         {
             get { return _AnimalName; }
-            set { _AnimalName = value; }
+            set
+            {
+                _AnimalName = value;
+                RaisePropertyChanged("AnimalName");
+            }
         }
+
 
         private ICommand _AnimalListAdd;
         public ICommand AnimalListAdd
@@ -40,27 +57,13 @@ namespace JaegerLogic
                 {
                     _AnimalListAdd = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AnimalListAdd"));
+                        serv.AddAnimal(AnimalName);
                     });
                 }
                 return _AnimalListAdd;
             }
         }
-        private ICommand _AnimalListConfirm;
-        public ICommand AnimalListConfirm
-        {
-            get
-            {
-                if (_AnimalListConfirm == null)
-                {
-                    _AnimalListConfirm = new RelayCommand(() =>
-                    {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AnimalListConfirm"));
-                    });
-                }
-                return _AnimalListConfirm;
-            }
-        }
+
         private ICommand _AnimalListCancel;
         public ICommand AnimalListCancel
         {
@@ -76,5 +79,37 @@ namespace JaegerLogic
                 return _AnimalListCancel;
             }
         }
+        private ICommand _AnimalListDelete;
+        public ICommand AnimalListDelete
+        {
+            get
+            {
+                if (_AnimalListDelete == null)
+                {
+                    _AnimalListDelete = new RelayCommand(() =>
+                      {
+                          serv.DeleteAnimal(SelectedAnimal);
+                      });
+                }
+                RaisePropertyChanged("AnimalList");
+                return _AnimalListDelete;
+            }
+        }
+        private ICommand _EditAnimal;
+        public ICommand EditAnimal
+        {
+            get
+            {
+                if (_EditAnimal == null)
+                {
+                    _EditAnimal = new RelayCommand(() =>
+                      {
+                          serv.UpdateAnimal(SelectedAnimal);
+                      });
+                }
+                return _EditAnimal;
+            }
+        }
+
     }
 }

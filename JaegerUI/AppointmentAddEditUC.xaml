@@ -15,41 +15,55 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Margin="0,0,5,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="65"/>
-                <RowDefinition Height="85"/>
+                <RowDefinition Height="54"/>
+                <RowDefinition Height="83"/>
                 <RowDefinition Height="65"/>
                 <RowDefinition Height="45"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <Label Content="Bezeichnung" FontSize="16"/>
-                <TextBox x:Name="TxtName" Height="25" VerticalContentAlignment="Center" Text="{Binding Name}"/>
+                <TextBox x:Name="TxtName" Height="25" VerticalContentAlignment="Center" Text="{Binding Appointment.Bezeichnung}"/>
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <Label Content="Beginn" FontSize="16"/>
-                <DatePicker x:Name="DPStartDate" Height="25" VerticalContentAlignment="Center" Text="{Binding Date}"/>
+                <DatePicker x:Name="DPStartDate" Height="25" VerticalContentAlignment="Center" SelectedDate="{Binding Appointment.DatumUhrzeit,Mode=TwoWay}"/>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="CBHrs" Height="25" Width="70" VerticalContentAlignment="Center" Text="{Binding Hrs}"/>
+                    <ComboBox x:Name="CBHrs" Height="25" Width="50" VerticalContentAlignment="Center" ItemsSource="{Binding Hrs}" SelectedItem="{Binding ChosenHour}"/>
+                    <Label Content="Uhr"/>
                     <Label Width="5"/>
-                    <ComboBox x:Name="CBMin" Height="25" Width="70" VerticalContentAlignment="Center" Text="{Binding Minutes}"/>
+                    <ComboBox x:Name="CBMin" Height="25" Width="50" VerticalContentAlignment="Center" ItemsSource="{Binding Minutes}" SelectedItem="{Binding ChosenMinute}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <Label Content="Ort" FontSize="16"/>
-                <TextBox x:Name="TxtPlace" Height="25" VerticalContentAlignment="Center" Text="{Binding Place}"/>
+                <TextBox x:Name="TxtPlace" Height="25" VerticalContentAlignment="Center" Text="{Binding Appointment.Ort}"/>
             </StackPanel>
             <StackPanel Grid.Row="3">
                 <RadioButton x:Name="RBHunt" Content="Jagd" FontSize="16" IsChecked="{Binding AppointmentIsHunt}"/>
-                <RadioButton x:Name="RBNoHunt" Content="Andere" FontSize="16" IsChecked="{Binding AppointmentIsHunt}"/>
+                <RadioButton x:Name="RBNoHunt" Content="Andere" FontSize="16" IsChecked="{Binding AppointmentIsOther}"/><!--IsChecked="{Binding AppointmentIsHunt}"-->
             </StackPanel>
         </Grid>
-        <DataGrid Grid.Column="1" Margin="5,0,0,0">
+        <DataGrid Grid.Column="1" Margin="5,0,0,0" ItemsSource="{Binding HunterList}" SelectedItem="{Binding SelectedHunter}" AutoGenerateColumns="False" MinRowHeight="20">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn/>
-                <DataGridTextColumn/>
-                <DataGridComboBoxColumn/>
-                <DataGridTemplateColumn/>
+                <DataGridTextColumn Header="Vorname" Binding="{Binding Vorname, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname,Mode=OneWay}"/>
+                <DataGridCheckBoxColumn Header="Eingeladen" Binding="{Binding Eingeladen}"/>
+                <DataGridComboBoxColumn Header="Rolle" SelectedItemBinding="{Binding Rolle}" MinWidth="50" Visibility="Visible">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Role, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="{x:Type ComboBox}">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.Role, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="Gäste" Binding="{Binding Gaeste}"/>
             </DataGrid.Columns>
+            <!--ItemsSource="{Binding Path=DataContext.Role, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"-->
         </DataGrid>
         <Button x:Name="BtnCancel" Content="Abbrechen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Background="#FFE0CBA8" Command="{Binding AppointmentAddEditCancel}"/>
         <Button x:Name="BtnConfirm" Content="Bestätigen" Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8" Command="{Binding AppointmentAddEditConfirm}"/>
