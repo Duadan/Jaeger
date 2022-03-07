@@ -256,7 +256,8 @@ namespace JaegerLogic
                     {
 
                         serv.DelHunter(ID);
-
+                        ExperimentalHunter = serv.GetAllHunters();
+                        RaisePropertyChanged("ExperimentalHunter");
                     });
                 }
                 return _DelHunter;

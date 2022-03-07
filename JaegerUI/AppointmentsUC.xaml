@@ -34,7 +34,7 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Label Content="Termine"/>
-            <DataGrid Grid.Row="1" ItemsSource="{Binding Appointments, Mode=TwoWay}" SelectedItem="{Binding SelectedAppointment, Mode=TwoWay}" CanUserResizeColumns="True" AutoGenerateColumns="False">
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Appointments, Mode=TwoWay}" SelectedItem="{Binding SelectedAppointment, Mode=TwoWay}" CanUserResizeColumns="True" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Bezeichnung,Mode=OneWay}"/>
                     <DataGridTextColumn Binding="{Binding DatumUhrzeit,Mode=OneWay}"/>

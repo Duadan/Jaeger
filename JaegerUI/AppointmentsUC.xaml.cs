@@ -24,6 +24,8 @@ namespace JaegerUI
     {
         public AppointmentsUC()
         {
+            AppointmentInfoUC appInfoUC = new AppointmentInfoUC();
+
             InitializeComponent();
             CtrlAppointment.Content = new AppointmentCalendarUC();
             Messenger.Default.Register<MainContentChangeMessage>(this, (MainContentChangeMessage message) =>
@@ -31,7 +33,7 @@ namespace JaegerUI
                 switch (message.Control)
                 {
                     case "AppointmentInfoUC":
-                        CtrlAppointment.Content = new AppointmentInfoUC();
+                        CtrlAppointment.Content = /*appInfoUC;*/ new AppointmentInfoUC();
                         break;
                     case "AppointmentAddEditUC":
                         CtrlAppointment.Content = new AppointmentAddEditUC();//ID oder so mitgeben
@@ -48,6 +50,12 @@ namespace JaegerUI
                     case "CertificateUC":
                         CtrlAppointment.Content = new AppointmentCertificateUC();
                         break;
+                    //case "AppInfo2":
+                    //    if (CtrlAppointment.Content == appInfoUC)
+                    //    {
+                    //        CtrlAppointment.Content = new AppointmentInfoUCViewModel();
+                    //    }
+                    //    break;
                 }
             });
         }

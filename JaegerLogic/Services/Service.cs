@@ -38,51 +38,61 @@ namespace JaegerLogic
             }
         }
 
-        public void InsertHunter(Jaeger hunter)
+        public void InsertHunter(Jaeger hunterToAdd)
         {
             using (JaegerDB hunt = new JaegerDB())
             {
-                hunt.Jaeger.Add(hunter);
+                hunt.Jaeger.Add(hunterToAdd);
                 hunt.SaveChanges();
             }
         }
 
-        public void UpdateHunter(Jaeger jaeger)
+        public void UpdateHunter(Jaeger jaegerToUpdate)
         {
             using (JaegerDB hunt = new JaegerDB())
             {
-                Jaeger huntards = hunt.Jaeger.Find(jaeger.ID);
+                Jaeger huntards = hunt.Jaeger.Find(jaegerToUpdate.ID);
 
-                huntards.Anrede = jaeger.Anrede;
-                huntards.Vorname = jaeger.Vorname;
-                huntards.Nachname = jaeger.Nachname;
-                huntards.Funktion = jaeger.Funktion;
-                huntards.Straße = jaeger.Straße;
-                huntards.Hausnummer = jaeger.Hausnummer;
-                huntards.Adresszusatz = jaeger.Adresszusatz;
-                huntards.PLZ = jaeger.PLZ;
-                huntards.Ort = jaeger.Ort;
-                huntards.Telefonnummer1 = jaeger.Telefonnummer1;
-                huntards.Telefonnummer2 = jaeger.Telefonnummer2;
-                huntards.Telefonnummer3 = jaeger.Telefonnummer3;
-                huntards.Email = jaeger.Email;
-                huntards.Geburtsdatum = jaeger.Geburtsdatum;
+                huntards.Anrede = jaegerToUpdate.Anrede;
+                huntards.Vorname = jaegerToUpdate.Vorname;
+                huntards.Nachname = jaegerToUpdate.Nachname;
+                huntards.Funktion = jaegerToUpdate.Funktion;
+                huntards.Straße = jaegerToUpdate.Straße;
+                huntards.Hausnummer = jaegerToUpdate.Hausnummer;
+                huntards.Adresszusatz = jaegerToUpdate.Adresszusatz;
+                huntards.PLZ = jaegerToUpdate.PLZ;
+                huntards.Ort = jaegerToUpdate.Ort;
+                huntards.Telefonnummer1 = jaegerToUpdate.Telefonnummer1;
+                huntards.Telefonnummer2 = jaegerToUpdate.Telefonnummer2;
+                huntards.Telefonnummer3 = jaegerToUpdate.Telefonnummer3;
+                huntards.Email = jaegerToUpdate.Email;
+                huntards.Geburtsdatum = jaegerToUpdate.Geburtsdatum;
 
                 hunt.SaveChanges();
             }
         }
 
-        public void DelHunter(int ID)
+        public void DelHunter(int hunterID)
         {
             
             using (JaegerDB hunt = new JaegerDB())
             {
-                //if/where SelectedHunter.ID==hunter.ID
-                Jaeger del = hunt.Jaeger.Find(ID);
+                //Einladung löschen optional? falls ja: MessageBoxResult ja-> mach; nein->skip
+                var rip = from a in hunt.Rueckmeldung
+                          where a.Jaeger_ID == hunterID
+                          select new { a.ID };
+                foreach(var i in rip)
+                {
+                    hunt.Rueckmeldung.Remove(hunt.Rueckmeldung.Find(i.ID));
+                }
+                Jaeger del = hunt.Jaeger.Find(hunterID);
                 hunt.Jaeger.Remove(del);
+                //List<Rueckmeldung>ruck = (List<Rueckmeldung>)hunt.Rueckmeldung.Where(x => x.Jaeger_ID == ID);
+                //hunt.Rueckmeldung.RemoveRange(ruck);
                 hunt.SaveChanges();
             }
         }
+
         public List<Jaeger> GetSelectedHunter(int appointmentID)
         {
             using (JaegerDB hunt = new JaegerDB())

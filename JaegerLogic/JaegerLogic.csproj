@@ -127,6 +127,7 @@
       <DependentUpon>JaegerDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\Service.cs" />
+    <Compile Include="Services\ServiceAddGame.cs" />
     <Compile Include="Services\ServiceAnimal.cs" />
     <Compile Include="Services\ServiceAppointments.cs" />
     <Compile Include="sysdiagrams.cs">

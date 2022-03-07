@@ -18,12 +18,16 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="ListHunter" Grid.Column="0" Margin="0,0,5,0" ItemsSource="{Binding AppointmentAddGameListHunter}"/>
-        <DataGrid Grid.Column="1" Margin="5,0,0,0" ItemsSource="{Binding AppointmentAddGameListAnimal}">
+        <DataGrid x:Name="ListHunter" Grid.Column="0" Margin="0,0,5,0" ItemsSource="{Binding AppointmentAddGameListHunter}" SelectedItem="{Binding SelectedHunter}" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn/>
-                <DataGridTextColumn/>
-                <DataGridCheckBoxColumn/>
+                <DataGridTextColumn Binding="{Binding Vorname,Mode=OneWay}" Header="Vorname"/>
+                <DataGridTextColumn Binding="{Binding Nachname,Mode=OneWay}" Header="Nachname"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Grid.Column="1" Margin="5,0,0,0" ItemsSource="{Binding AppointmentAddGameListAnimal}" AutoGenerateColumns="False" CanUserResizeColumns="True" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Tier, Mode=OneWay}" Header="Tierart"/>
+                <DataGridTextColumn Binding="{Binding Anzahl,Mode=TwoWay}" Header="Anzahl"/>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid Grid.Column="3" ItemsSource="{Binding ListGame}">
@@ -34,6 +38,7 @@
                 <DataGridCheckBoxColumn/><!--löschen Button-->
             </DataGrid.Columns>
         </DataGrid>
+        
         <Button x:Name="BtnConfirm" Content="Bestätigen" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="30" Width="75" Grid.Column="1" Grid.Row="1" Background="#FFE0CBA8" Command="{Binding AddGameConfirm}"/>
         <Button x:Name="BtnCancel" Content="Abbrechen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="75" Grid.Column="3" Grid.Row="1" Background="#FFE0CBA8" Command="{Binding AddGameCancel}"/>
     </Grid>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonServiceLocator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,26 +31,26 @@ namespace JaegerLogic
             }
         }
 
-        public List<TerminList> GetTerminLists()
-        {
-            using (JaegerDB hunt = new JaegerDB())
-            {
-                var termine = from a in hunt.Termine
-                              select new { a.ID, a.Bezeichnung, /*a.DatumUhrzeit,*/ a.Ort, a.Typ };
-                var appointment = new List<TerminList>();
-                foreach (var b in termine)
-                {
-                    appointment.Add(new TerminList()
-                    {
-                        ID = b.ID,
-                        Bezeichnung = b.Bezeichnung,
-                        //DatumUhrzeit = b.DatumUhrzeit,
-                        Typ = b.Typ
-                    });
-                }
-                return appointment;
-            }
-        }
+        //public List<TerminList> GetTerminLists()
+        //{
+        //    using (JaegerDB hunt = new JaegerDB())
+        //    {
+        //        var termine = from a in hunt.Termine
+        //                      select new { a.ID, a.Bezeichnung, /*a.DatumUhrzeit,*/ a.Ort, a.Typ };
+        //        var appointment = new List<TerminList>();
+        //        foreach (var b in termine)
+        //        {
+        //            appointment.Add(new TerminList()
+        //            {
+        //                ID = b.ID,
+        //                Bezeichnung = b.Bezeichnung,
+        //                //DatumUhrzeit = b.DatumUhrzeit,
+        //                Typ = b.Typ
+        //            });
+        //        }
+        //        return appointment;
+        //    }
+        //}
 
         public void InsertAppointment(Termine appointmentList, List<TerminJaeger> appointmentHunterList)
         {
@@ -104,12 +105,12 @@ namespace JaegerLogic
         //    }
         //}
 
-        public List<Jagderfolge> GetAllGame(int ID)
+        public List<Jagderfolge> GetAllGame(int appointmentID)
         {
             using (JaegerDB hunt = new JaegerDB())
             {
                 var game = from a in hunt.Jagderfolge
-                           where a.Termine_ID == ID
+                           where a.Termine_ID == appointmentID
                            select new { a.ID, a.Jaeger_ID, a.Termine_ID, a.Tiere_ID, };
                 var gamelist = new List<Jagderfolge>();
                 foreach (var b in game)
@@ -147,7 +148,7 @@ namespace JaegerLogic
             }
         }
 
-        public List<TerminJaeger> GetAllAppointmentHunters(int terminID)
+        public List<TerminJaeger> GetAllAppointmentHunters(int appointmentID)
         {
             using (JaegerDB hunt = new JaegerDB())
             {
@@ -156,7 +157,7 @@ namespace JaegerLogic
                              on a.ID equals b.Jaeger_ID
                              into ab
                              from c in ab.DefaultIfEmpty()
-                             where c.Termin_ID == terminID
+                             where c.Termin_ID == appointmentID
                              select new
                              {
                                  a.ID,
@@ -186,6 +187,7 @@ namespace JaegerLogic
                 return huntards;
             }
         }
+
         public Termine SelectedAppointment(int appointmentID)
         {
             using (JaegerDB hunt = new JaegerDB())
@@ -205,6 +207,7 @@ namespace JaegerLogic
                 return appointment;
             }
         }
+
         public List<Game> GetBigGame(int appointmentID, int hunterID)
         {
             using (JaegerDB hunt = new JaegerDB())
@@ -223,14 +226,45 @@ namespace JaegerLogic
                 return game;
             }
         }
+
+        public void GetTheNumbers(int appointmentID)
+        {
+            using (JaegerDB hunt=new JaegerDB())
+            {
+                var hunter = from a in hunt.Rueckmeldung
+                             where a.Termin_ID == appointmentID
+                             select new { a.Gäste,a.Rolle };
+                int all=0;
+                int hunting = 0;
+                int scary = 0;
+                foreach(var i in hunter)
+                {
+                    all++;
+                    all += i.Gäste;
+                    scary += i.Gäste;
+                    if (i.Rolle == "Jäger")
+                    {
+                        hunting++;
+                    }
+                    else
+                    {
+                        scary++;
+                    }
+                }
+                AppointmentInfoUCViewModel info = ServiceLocator.Current.GetInstance<AppointmentInfoUCViewModel>();
+                info.CountGuests = all;
+                info.CountBeater = scary;
+                info.CountHunter = hunting;
+            }
+        }
     }
-    public partial class TerminList
-    {
-        public string Bezeichnung { get; set; }
-        //public DateTime DatumUhrzeit { get; set; }
-        public int ID { get; set; }
-        public string Typ { get; set; }
-    }
+    //public partial class TerminList
+    //{
+    //    public string Bezeichnung { get; set; }
+    //    //public DateTime DatumUhrzeit { get; set; }
+    //    public int ID { get; set; }
+    //    public string Typ { get; set; }
+    //}
 
     public partial class TerminJaeger
     {

@@ -44,7 +44,7 @@
                 <RadioButton x:Name="RBNoHunt" Content="Andere" FontSize="16" IsChecked="{Binding AppointmentIsOther}"/><!--IsChecked="{Binding AppointmentIsHunt}"-->
             </StackPanel>
         </Grid>
-        <DataGrid Grid.Column="1" Margin="5,0,0,0" ItemsSource="{Binding HunterList}" SelectedItem="{Binding SelectedHunter}" AutoGenerateColumns="False" MinRowHeight="20">
+        <DataGrid Grid.Column="1" Margin="5,0,0,0" ItemsSource="{Binding HunterList}" SelectedItem="{Binding SelectedHunter}" AutoGenerateColumns="False" MinRowHeight="20" CanUserAddRows="False" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vorname" Binding="{Binding Vorname, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname,Mode=OneWay}"/>

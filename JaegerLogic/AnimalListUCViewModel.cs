@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class AnimalListUCViewModel : ViewModelBase
+    public class AnimalListUCViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly ServiceAnimal serv = new ServiceAnimal();
         public AnimalListUCViewModel()

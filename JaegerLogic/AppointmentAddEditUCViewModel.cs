@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class AppointmentAddEditUCViewModel : ViewModelBase
+    public class AppointmentAddEditUCViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly ServiceAppointments serv = new ServiceAppointments();
         //private readonly Service servH = new Service();
@@ -95,14 +96,6 @@ namespace JaegerLogic
         {
             get { return !_AppointmentIsHunt; }
             set { _AppointmentIsHunt = !value; }
-        }
-
-
-        private List<string> _AppointmentHunter;
-        public List<string> AppointmentHunter
-        {
-            get { return _AppointmentHunter; }
-            set { _AppointmentHunter = value; }
         }
 
         private List<TerminJaeger> _HunterList;

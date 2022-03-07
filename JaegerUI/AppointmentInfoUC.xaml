@@ -19,7 +19,7 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DataGrid ItemsSource="{Binding ListHunter}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedHunter}">
+        <DataGrid ItemsSource="{Binding ListHunter}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedHunter}" SelectionMode="Single" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vorname"  Binding="{Binding Vorname}"/>
                 <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname}"/>

@@ -1,8 +1,10 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class HunterAddEditUCViewModel : ViewModelBase
+    public class HunterAddEditUCViewModel : ViewModelBase,INotifyPropertyChanged
     {
         private readonly Service serv = new Service();
         public bool Edit = false;
@@ -98,6 +100,8 @@ namespace JaegerLogic
                                 Hunter = new Jaeger();
                             }
                         }
+                        HunterInfoUCViewModel send = ServiceLocator.Current.GetInstance<HunterInfoUCViewModel>();
+                        send.ExperimentalHunter = serv.GetAllHunters();
                     });
                 }
                 return _ConfirmHunter;
