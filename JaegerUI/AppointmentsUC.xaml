@@ -9,8 +9,8 @@
              DataContext="{Binding AppointmentsUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="15*" MaxWidth="300"/>
+            <ColumnDefinition Width="65*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -36,9 +36,16 @@
             <Label Content="Termine"/>
             <DataGrid Grid.Row="1" ItemsSource="{Binding Appointments, Mode=TwoWay}" SelectedItem="{Binding SelectedAppointment, Mode=TwoWay}" CanUserResizeColumns="True" AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Bezeichnung,Mode=OneWay}"/>
-                    <DataGridTextColumn Binding="{Binding DatumUhrzeit,Mode=OneWay}"/>
-                    <DataGridTextColumn Binding="{Binding Typ,Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Termin" Binding="{Binding Bezeichnung,Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Beginn" Binding="{Binding DatumUhrzeit,Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Art" Binding="{Binding Typ,Mode=OneWay}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Löschen" CommandParameter="{Binding ID}" Command="{Binding Path=DataContext.DeleteAppointment, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Background="#ffe0cba8"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Grid.Row="2" Content="erstellen" Margin="0,0,0,5" Height="30" Background="#FFE0CBA8" Command="{Binding AppointmentAddEditUC}"/>

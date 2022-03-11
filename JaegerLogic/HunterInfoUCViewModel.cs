@@ -17,18 +17,6 @@ namespace JaegerLogic
         private readonly Service serv = new Service();
         public HunterInfoUCViewModel()
         {
-            _FormOfAdress = "Anrede";
-            _FirstName = "Vorname";
-            _LastName = "Nachname";
-            _Function = "Funktion";
-            _Adress = "Straße HausNr Zusatz";
-            _Place = "PLZ Ort";
-            _Phone1 = "TelefonNr1";
-            _Phone2 = "TelefonNr2";
-            _Phone3 = "TelefonNr3";
-            _Email = "Email Adresse";
-            _Birthday = "Geburtstag";
-
             _ExperimentalHunter = serv.GetAllHunters();
         }
 
@@ -38,8 +26,26 @@ namespace JaegerLogic
             get { return _SelectedHunter; }
             set
             {
-                _SelectedHunter = value;
-                RaisePropertyChanged("SelectedHunter");
+                if (value != null)
+                {
+                    _SelectedHunter = serv.GetSelectedHunterInfo(value.ID);
+                    RaisePropertyChanged("SelectedHunter");
+                }
+                else
+                {
+                    _SelectedHunter.Adresszusatz = "Adresszusatz";
+                    _SelectedHunter.Anrede = "Anrede";
+                    _SelectedHunter.Vorname = "Vorname";
+                    _SelectedHunter.Nachname = "Nachname";
+                    _SelectedHunter.Funktion = "Funktion";
+                    _SelectedHunter.Straße = "Straße HausNr Zusatz";
+                    _SelectedHunter.Hausnummer = "HausNr";
+                    _SelectedHunter.Ort = "Ort";
+                    _SelectedHunter.PLZ = "12345";
+                    _SelectedHunter.Telefonnummer1 = "0123456789";
+                    _SelectedHunter.Email = "Email Adresse";
+                    _SelectedHunter.Geburtsdatum = DateTime.Today;
+                }
                 ShowHunterInfo();
             }
         }
@@ -217,6 +223,7 @@ namespace JaegerLogic
                     {
                         HunterAddEditUCViewModel hunterAdd = ServiceLocator.Current.GetInstance<HunterAddEditUCViewModel>();
                         hunterAdd.Edit = false;
+                        hunterAdd.Hunter = new Jaeger();
                         Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("HunterAddEditUC"));
                     });
                 }
@@ -257,6 +264,7 @@ namespace JaegerLogic
 
                         serv.DelHunter(ID);
                         ExperimentalHunter = serv.GetAllHunters();
+                        SelectedHunter = ExperimentalHunter[0];
                         RaisePropertyChanged("ExperimentalHunter");
                     });
                 }

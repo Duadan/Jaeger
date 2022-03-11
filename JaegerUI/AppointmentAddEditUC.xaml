@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0">
                 <Label Content="Bezeichnung" FontSize="16"/>
-                <TextBox x:Name="TxtName" Height="25" VerticalContentAlignment="Center" Text="{Binding Appointment.Bezeichnung}"/>
+                <TextBox x:Name="TxtName" Height="25" VerticalContentAlignment="Center" Text="{Binding Appointment.Bezeichnung}" BorderBrush="{Binding ColorName}"/>
             </StackPanel>
             <StackPanel Grid.Row="1">
                 <Label Content="Beginn" FontSize="16"/>
@@ -37,7 +37,7 @@
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <Label Content="Ort" FontSize="16"/>
-                <TextBox x:Name="TxtPlace" Height="25" VerticalContentAlignment="Center" Text="{Binding Appointment.Ort}"/>
+                <TextBox x:Name="TxtPlace" Height="25" VerticalContentAlignment="Center" Text="{Binding Appointment.Ort}" BorderBrush="{Binding ColorPlace}"/>
             </StackPanel>
             <StackPanel Grid.Row="3">
                 <RadioButton x:Name="RBHunt" Content="Jagd" FontSize="16" IsChecked="{Binding AppointmentIsHunt}"/>

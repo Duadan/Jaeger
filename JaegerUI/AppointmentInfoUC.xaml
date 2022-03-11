@@ -21,8 +21,9 @@
         </Grid.ColumnDefinitions>
         <DataGrid ItemsSource="{Binding ListHunter}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedHunter}" SelectionMode="Single" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vorname"  Binding="{Binding Vorname}"/>
-                <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname}"/>
+                <DataGridTextColumn Header="Vorname"  Binding="{Binding Vorname, Mode=OneWay}" />
+                <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname, Mode=OneWay}" />
+                <DataGridTextColumn Header="Rolle" Binding="{Binding Rolle, Mode=OneWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="2" Grid.RowSpan="2">

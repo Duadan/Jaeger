@@ -11,19 +11,11 @@ namespace JaegerLogic
     {
         public List<Tiere> GetAllAnimals()
         {
-            using(JaegerDB hunt = new JaegerDB())
+            using (JaegerDB hunt = new JaegerDB())
             {
                 var animal = from a in hunt.Tiere
-                             select new { a.ID, a.Tierart };
-                List<Tiere> animals = new List<Tiere>();
-                foreach(var b in animal)
-                {
-                    animals.Add(new Tiere
-                    {
-                        ID=b.ID,
-                        Tierart=b.Tierart
-                    });
-                }
+                             select a;
+                List<Tiere> animals = animal.ToList();
                 return animals;
             }
         }
@@ -53,8 +45,8 @@ namespace JaegerLogic
             {
                 var copy = from a in hunt.Tiere
                            select new { a.Tierart };
-                bool existin=false;
-                foreach(var i in copy)
+                bool existin = false;
+                foreach (var i in copy)
                 {
                     if (i.Tierart == animalName)
                     {

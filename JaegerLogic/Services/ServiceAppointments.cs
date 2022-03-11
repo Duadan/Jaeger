@@ -14,19 +14,8 @@ namespace JaegerLogic
             using (JaegerDB hunt = new JaegerDB())
             {
                 var termine = from a in hunt.Termine
-                              select new { a.ID, a.Bezeichnung, a.DatumUhrzeit, a.Ort, a.Typ };
-                var appointment = new List<Termine>();
-                foreach (var b in termine)
-                {
-                    appointment.Add(new Termine()
-                    {
-                        ID = b.ID,
-                        Bezeichnung = b.Bezeichnung,
-                        DatumUhrzeit = b.DatumUhrzeit,
-                        Ort = b.Ort,
-                        Typ = b.Typ
-                    });
-                }
+                              select a;
+                List<Termine> appointment = termine.ToList();
                 return appointment;
             }
         }
@@ -56,14 +45,7 @@ namespace JaegerLogic
         {
             using (JaegerDB hunt = new JaegerDB())
             {
-                Termine Appointment = new Termine
-                {
-                    Bezeichnung = appointmentList.Bezeichnung,
-                    DatumUhrzeit = appointmentList.DatumUhrzeit,
-                    Typ = appointmentList.Typ,
-                    Ort = appointmentList.Ort
-                };
-                hunt.Termine.Add(Appointment);
+                hunt.Termine.Add(appointmentList);
                 Rueckmeldung answer;
                 foreach (TerminJaeger i in appointmentHunterList)
                 {
@@ -74,12 +56,66 @@ namespace JaegerLogic
                             Gäste = i.Gaeste,
                             Jaeger_ID = i.ID,
                             Rolle = i.Rolle,
-                            Termin_ID = Appointment.ID
+                            Termin_ID = appointmentList.ID
                         };
                         hunt.Rueckmeldung.Add(answer);
                     }
-                    hunt.SaveChanges();
                 }
+                hunt.SaveChanges();
+            }
+        }
+
+        public void UpdateAppointment(Termine appointment, List<TerminJaeger> appointmentHunterList)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                Termine updating = hunt.Termine.Find(appointment.ID);
+
+                updating.Bezeichnung = appointment.Bezeichnung;
+                updating.DatumUhrzeit = appointment.DatumUhrzeit;
+                updating.Ort = appointment.Ort;
+                updating.Typ = appointment.Typ;
+                hunt.SaveChanges();
+                
+                var invites = from a in hunt.Rueckmeldung
+                              where a.Termin_ID == appointment.ID
+                              select a;
+               
+                Rueckmeldung answer;
+                foreach (TerminJaeger i in appointmentHunterList.Where(hunter => hunter.Eingeladen))
+                {
+                    //Jäger Updaten, z.B. mehr Gäste
+                    Rueckmeldung adjust = invites.FirstOrDefault(answr => answr.Jaeger_ID == i.ID);
+                    if (adjust != null)
+                    {
+                        adjust.Gäste = i.Gaeste;
+                        adjust.Rolle = i.Rolle;
+                    }
+                    //Jäger hinzufügen; mehr eingeladen
+                    else
+                    {
+                        answer = new Rueckmeldung()
+                        {
+                            Gäste = i.Gaeste,
+                            Jaeger_ID = i.ID,
+                            Rolle = i.Rolle,
+                            Termin_ID = updating.ID
+                        };
+                        hunt.Rueckmeldung.Add(answer);
+                    }
+
+                }
+                //Jäger ausladen
+                foreach (TerminJaeger i in appointmentHunterList.Where(hunter => !hunter.Eingeladen))
+                {
+                    Rueckmeldung adjust = invites.FirstOrDefault(answr => answr.Jaeger_ID == i.ID);
+
+                    if (adjust != null)
+                    {
+                        hunt.Rueckmeldung.Remove(adjust);
+                    }
+                }
+                hunt.SaveChanges();
             }
         }
         //public void SaveAnswers(List<TerminJaeger> appointmentHunterList, int appointmentID)
@@ -111,18 +147,8 @@ namespace JaegerLogic
             {
                 var game = from a in hunt.Jagderfolge
                            where a.Termine_ID == appointmentID
-                           select new { a.ID, a.Jaeger_ID, a.Termine_ID, a.Tiere_ID, };
-                var gamelist = new List<Jagderfolge>();
-                foreach (var b in game)
-                {
-                    gamelist.Add(new Jagderfolge()
-                    {
-                        ID = b.ID,
-                        Jaeger_ID = b.Jaeger_ID,
-                        Termine_ID = b.Termine_ID,
-                        Tiere_ID = b.Tiere_ID
-                    });
-                }
+                           select a;
+                var gamelist = game.ToList();
                 return gamelist;
             }
         }
@@ -167,10 +193,7 @@ namespace JaegerLogic
                                  c.Rolle
                              };
 
-                //var disappoint = from b in hunt.Rueckmeldung
-                //                 where b.Termin_ID == ID
-                //                 select new { b.Rolle, b.Gäste,b.Jaeger_ID };
-                var huntards = new List<TerminJaeger>();
+                List<TerminJaeger> huntards = new List<TerminJaeger>();
                 foreach (var item in hunter)
                 {
                     huntards.Add(new TerminJaeger()
@@ -194,7 +217,7 @@ namespace JaegerLogic
             {
                 var termine = from a in hunt.Termine
                               where a.ID == appointmentID
-                              select new { a.ID, a.Bezeichnung, a.DatumUhrzeit, a.Ort, a.Typ };
+                              select a;
                 Termine appointment = new Termine();
                 foreach (var item in termine)
                 {
@@ -207,7 +230,7 @@ namespace JaegerLogic
                 return appointment;
             }
         }
-
+        //WiP
         public List<Game> GetBigGame(int appointmentID, int hunterID)
         {
             using (JaegerDB hunt = new JaegerDB())
@@ -218,8 +241,8 @@ namespace JaegerLogic
                                 where b.Termine_ID == appointmentID && b.Jaeger_ID == hunterID
                                 select new { a.Tierart };
                 List<Game> game = new List<Game>();
-                int count=0;
-                foreach(var item in killcount)
+                int count = 0;
+                foreach (var item in killcount)
                 {
                     count++;
                 }
@@ -227,17 +250,17 @@ namespace JaegerLogic
             }
         }
 
-        public void GetTheNumbers(int appointmentID)
+        public int[] GetTheNumbers(int appointmentID)//[0]all; [1]hunting; [2]scary
         {
-            using (JaegerDB hunt=new JaegerDB())
+            using (JaegerDB hunt = new JaegerDB())
             {
                 var hunter = from a in hunt.Rueckmeldung
                              where a.Termin_ID == appointmentID
-                             select new { a.Gäste,a.Rolle };
-                int all=0;
+                             select new { a.Gäste, a.Rolle };
+                int all = 0;
                 int hunting = 0;
                 int scary = 0;
-                foreach(var i in hunter)
+                foreach (var i in hunter)
                 {
                     all++;
                     all += i.Gäste;
@@ -251,10 +274,96 @@ namespace JaegerLogic
                         scary++;
                     }
                 }
-                AppointmentInfoUCViewModel info = ServiceLocator.Current.GetInstance<AppointmentInfoUCViewModel>();
-                info.CountGuests = all;
-                info.CountBeater = scary;
-                info.CountHunter = hunting;
+                int[] send = { all, hunting, scary };
+                return send;
+                //AppointmentInfoUCViewModel info = ServiceLocator.Current.GetInstance<AppointmentInfoUCViewModel>();
+                //info.CountGuests = all;
+                //info.CountBeater = scary;
+                //info.CountHunter = hunting;
+            }
+        }
+
+        public List<HunterInvited> GetInvitedHunter(int appointmentID)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                var hunter = from a in hunt.Jaeger
+                             join b in hunt.Rueckmeldung
+                             on a.ID equals b.Jaeger_ID
+                             into ab
+                             from c in ab.DefaultIfEmpty()
+                             where c.Termin_ID == appointmentID
+                             select new
+                             {
+                                 a.ID,
+                                 a.Anrede,
+                                 a.Vorname,
+                                 a.Nachname,
+                                 a.Funktion,
+                                 a.Straße,
+                                 a.Hausnummer,
+                                 a.Adresszusatz,
+                                 a.PLZ,
+                                 a.Ort,
+                                 a.Telefonnummer1,
+                                 a.Telefonnummer2,
+                                 a.Telefonnummer3,
+                                 a.Email,
+                                 a.Geburtsdatum,
+                                 c.Gäste,
+                                 c.Rolle
+                             };
+
+                //var disappoint = from b in hunt.Rueckmeldung
+                //                 where b.Termin_ID == ID
+                //                 select new { b.Rolle, b.Gäste,b.Jaeger_ID };
+                var huntards = new List<HunterInvited>();
+                foreach (var item in hunter)
+                {
+                    huntards.Add(new HunterInvited()
+                    {
+                        ID = item.ID,
+                        Anrede = item.Anrede,
+                        Vorname = item.Vorname,
+                        Nachname = item.Nachname,
+                        Funktion = item.Funktion,
+                        Straße = item.Straße,
+                        Hausnummer = item.Hausnummer,
+                        Adresszusatz = item.Adresszusatz,
+                        PLZ = item.PLZ,
+                        Ort = item.Ort,
+                        Telefonnummer1 = item.Telefonnummer1,
+                        Telefonnummer2 = item.Telefonnummer2,
+                        Telefonnummer3 = item.Telefonnummer3,
+                        Email = item.Email,
+                        Geburtsdatum = item.Geburtsdatum,
+                        Gäste = item.Gäste,
+                        Rolle = item.Rolle,
+                        //Eingeladen = !string.IsNullOrEmpty(item.Rolle)
+                    });
+                }
+
+                return huntards;
+            }
+        }
+
+        public void DelAppointment(int appointmentID)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                //Einladung löschen optional? falls ja: MessageBoxResult ja-> mach; nein->skip
+                var rip = from a in hunt.Rueckmeldung
+                          where a.Termin_ID == appointmentID
+                          select new { a.ID };
+                foreach (var i in rip)
+                {
+                    hunt.Rueckmeldung.Remove(hunt.Rueckmeldung.Find(i.ID));
+                }
+                Termine del = hunt.Termine.Find(appointmentID);
+                hunt.Termine.Remove(del);
+                //List<Rueckmeldung>ruck = (List<Rueckmeldung>)hunt.Rueckmeldung.Where(x => x.Jaeger_ID == ID);
+                //hunt.Rueckmeldung.RemoveRange(ruck);
+                hunt.SaveChanges();
             }
         }
     }
@@ -266,7 +375,7 @@ namespace JaegerLogic
     //    public string Typ { get; set; }
     //}
 
-    public partial class TerminJaeger
+    public class TerminJaeger
     {
         public string Vorname { get; set; }
         public string Nachname { get; set; }
@@ -280,5 +389,26 @@ namespace JaegerLogic
     {
         public string Animal { get; set; }
         public int Count { get; set; }
+    }
+
+    public class HunterInvited
+    {
+        public int ID { get; set; }
+        public string Vorname { get; set; }
+        public string Nachname { get; set; }
+        public string Anrede { get; set; }
+        public string Ort { get; set; }
+        public string PLZ { get; set; }
+        public string Straße { get; set; }
+        public string Hausnummer { get; set; }
+        public string Adresszusatz { get; set; }
+        public string Telefonnummer1 { get; set; }
+        public string Telefonnummer2 { get; set; }
+        public string Telefonnummer3 { get; set; }
+        public string Funktion { get; set; }
+        public string Email { get; set; }
+        public Nullable<System.DateTime> Geburtsdatum { get; set; }
+        public string Rolle { get; set; }
+        public int Gäste { get; set; }
     }
 }

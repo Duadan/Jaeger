@@ -12,12 +12,12 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class AppointmentsUCViewModel : ViewModelBase,INotifyPropertyChanged
+    public class AppointmentsUCViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly ServiceAppointments serv = new ServiceAppointments();
         public AppointmentsUCViewModel()
         {
-            _Appointments = serv.GetAllAppointments();
+            Appointments = serv.GetAllAppointments();
         }
 
         #region Buttons
@@ -49,6 +49,11 @@ namespace JaegerLogic
                     {
                         AppointmentAddEditUCViewModel edit = ServiceLocator.Current.GetInstance<AppointmentAddEditUCViewModel>();
                         edit.IsEdit = false;
+                        edit.Appointment = new Termine
+                        {
+                            DatumUhrzeit = DateTime.Today
+                        };
+                        edit.HunterList = serv.GetAllAppointmentHunters();
                         Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentAddEditUC"));
                     });
                 }
@@ -156,10 +161,31 @@ namespace JaegerLogic
                 AppointmentInfoUCViewModel bla = ServiceLocator.Current.GetInstance<AppointmentInfoUCViewModel>();
                 bla.SelectedID = value.ID;
                 bla.IsSelected = true;
+                int[] blub = serv.GetTheNumbers(value.ID);
+                bla.CountGuests = blub[0];
+                bla.CountHunter = blub[1];
+                bla.CountBeater = blub[2];
                 AppointmentAddGameUCViewModel bli = ServiceLocator.Current.GetInstance<AppointmentAddGameUCViewModel>();
-                bli.SelectedID = value.ID;
-                serv.GetTheNumbers(value.ID);
+                bli.SelectedAppointmentID = value.ID;
                 RaisePropertyChanged("SelectedAppointment");
+            }
+        }
+        private ICommand _DeleteAppointment;
+        public ICommand DeleteAppointment
+        {
+            get
+            {
+                if (_DeleteAppointment == null)
+                {
+                    _DeleteAppointment = new RelayCommand<int>((ID) =>
+                    {
+                        serv.DelAppointment(ID);
+                        Appointments = serv.GetAllAppointments();
+                        SelectedAppointment = Appointments[0];
+                        RaisePropertyChanged("Appointments");
+                    });
+                }
+                return _DeleteAppointment;
             }
         }
     }

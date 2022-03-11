@@ -30,6 +30,7 @@ namespace JaegerLogic
                 return huntards;
             }
         }
+
         public void AddToGame(AnimalShown selectedAnimal, int selectedHunterID, int selectedAppointmentID)
         {
             using (JaegerDB hunt = new JaegerDB())
@@ -47,6 +48,7 @@ namespace JaegerLogic
                 hunt.SaveChanges();
             }
         }
+
         public List<AnimalShown> GetAllAnimalsShown()
         {
             using (JaegerDB hunt = new JaegerDB())
@@ -67,11 +69,49 @@ namespace JaegerLogic
             }
         }
 
+        public List<AnimalShot> GetAnimalsShot()
+        {
+            using(JaegerDB hunt=new JaegerDB())
+            {
+                var killList = from a in hunt.Jagderfolge
+                               join b in hunt.Termine
+                               on a.Termine_ID equals b.ID
+                               join c in hunt.Tiere
+                               on a.Tiere_ID equals c.ID
+                               join d in hunt.Jaeger
+                               on a.Jaeger_ID equals d.ID
+                               select new { b.DatumUhrzeit, c.Tierart, d.Vorname, d.Nachname };
+                List<AnimalShot> shots = new List<AnimalShot>();
+                foreach(var i in killList)
+                {
+                    shots.Add(new AnimalShot
+                    {
+                        Vorname = i.Vorname,
+                        Nachname = i.Nachname,
+                        Tier = i.Tierart,
+                        Datum = i.DatumUhrzeit
+                    });
+                }
+                return shots;
+            }
+        }
+
     }
     public class AnimalShown
     {
         public int TierID { get; set; }
         public int Anzahl { get; set; }
         public string Tier { get; set; }
+    }
+
+    public class AnimalShot
+    {
+        public string Vorname { get; set; }
+
+        public string Nachname { get; set; }
+
+        public string Tier { get; set; }
+
+        public DateTime Datum { get; set; }
     }
 }

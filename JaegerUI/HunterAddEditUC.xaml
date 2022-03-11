@@ -27,19 +27,23 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Grid.Row="0" Content="Anrede*" FontSize="16"/>
-            <ComboBox Grid.Row="1" x:Name="CBformOfAdress" Height="25" VerticalContentAlignment="Center" ItemsSource="{Binding FormOfAdress}" SelectedItem="{Binding Hunter.Anrede}"/>
+            <Border Grid.Row="1" BorderBrush="{Binding ColorFormOfAdress}" BorderThickness="1">
+                <ComboBox x:Name="CBformOfAdress" Height="25" VerticalContentAlignment="Center" ItemsSource="{Binding FormOfAdress}" SelectedItem="{Binding Hunter.Anrede}" TabIndex="0" />
+            </Border>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <Label Grid.Row="0" Content="Vorname*" FontSize="16"/>
-            <TextBox Grid.Row="1" x:Name="TxtFirstName" Text="{Binding Hunter.Vorname}" Height="25" VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="1" x:Name="TxtFirstName" Text="{Binding Hunter.Vorname}" Height="25" VerticalContentAlignment="Center" BorderBrush="{Binding ColorFirstName}" TabIndex="1"/>
         </StackPanel>
         <StackPanel Grid.Row="4">
             <Label Grid.Row="0" Content="Geburtsdatum*" FontSize="16"/>
-            <DatePicker Grid.Row="1" x:Name="DPBirthday" Height="25" VerticalContentAlignment="Bottom" Text="{Binding Birthday}"/>
+            <DatePicker Grid.Row="1" x:Name="DPBirthday" Height="25" VerticalContentAlignment="Bottom" Text="{Binding Birthday}" BorderBrush="{Binding ColorBirthday}" TabIndex="3"/>
         </StackPanel>
         <StackPanel Grid.Row="5">
-            <Label Grid.Row="0" Content="Aufgabe/Funktion*"/>
-            <ComboBox Grid.Row="1" x:Name="CBTask" Height="25" VerticalContentAlignment="Center" ItemsSource="{Binding Task}" Text="{Binding Hunter.Funktion}"/>
+            <Label Grid.Row="0" Content="Aufgabe/Funktion*" />
+            <Border Grid.Row="1" BorderBrush="{Binding ColorFunction}" BorderThickness="1">
+                <ComboBox x:Name="CBTask" Height="25" VerticalContentAlignment="Center" ItemsSource="{Binding Task}" Text="{Binding Hunter.Funktion}" TabIndex="4"/>
+            </Border>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2">
             <Label Grid.Row="0" Content="Straße/Hausnummer*" FontSize="16"/>
@@ -49,13 +53,13 @@
                     <ColumnDefinition Width="48*"/>
                     <ColumnDefinition Width="15*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="TxtStreet" Grid.Column="0" Grid.ColumnSpan="2" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Straße}"/>
-                <TextBox x:Name="TxtNumber" Grid.Column="2" VerticalContentAlignment="Center" Text="{Binding Hunter.Hausnummer}"/>
+                <TextBox x:Name="TxtStreet" Grid.Column="0" Grid.ColumnSpan="2" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Straße}" BorderBrush="{Binding ColorStreet}" TabIndex="5"/>
+                <TextBox x:Name="TxtNumber" Grid.Column="2" VerticalContentAlignment="Center" Text="{Binding Hunter.Hausnummer}" BorderBrush="{Binding ColorHouseNumber}" TabIndex="6"/>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="2">
             <Label Content="Adresszusatz" FontSize="16"/>
-            <TextBox x:Name="TxtExtra" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Adresszusatz}"/>
+            <TextBox x:Name="TxtExtra" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Adresszusatz}" BorderBrush="{Binding ColorAdrextra}" TabIndex="7"/>
         </StackPanel>
             <Grid Grid.Column="2" Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -64,28 +68,29 @@
                 </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <Label Content="PLZ*" Grid.Row="0" FontSize="16"/>
-                <TextBox x:Name="TxtPLZ" Grid.Column="0" Grid.Row="1" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.PLZ}" ToolTip="Bitte Zahlen eingeben"/>
+                <TextBox x:Name="TxtPLZ" Grid.Column="0" Grid.Row="1" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.PLZ}" ToolTip="Bitte Zahlen eingeben" BorderBrush="{Binding 
+                    ColorPostal}" TabIndex="8"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Label Content="Wohnort*" Grid.Row="0" Grid.Column="1" FontSize="16"/>
-                <TextBox x:Name="TxtTown" Grid.Column="1" Grid.Row="1" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Ort}"/>
+                <TextBox x:Name="TxtTown" Grid.Column="1" Grid.Row="1" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Ort}" BorderBrush="{Binding ColorPlace}" TabIndex="9"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="3" Grid.Column="0">
             <Label Content="Nachname*" FontSize="16"/>
-            <TextBox x:Name="TxtLastName" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Nachname}"/>
+            <TextBox x:Name="TxtLastName" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Nachname}" BorderBrush="{Binding ColorLastName}" TabIndex="2"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="4" Grid.RowSpan="4">
             <Label Content="Telefonnummer*" FontSize="16"/>
-            <TextBox x:Name="TxTTel1" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Telefonnummer1}" ToolTip="Bitte Zahlen eingeben"/>
+            <TextBox x:Name="TxTTel1" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Telefonnummer1}" ToolTip="Bitte Zahlen eingeben" BorderBrush="{Binding ColorPhone1}" TabIndex="10"/>
             <Label Content="Telefonnummer2" FontSize="16"/>
-            <TextBox x:Name="TxTTel2" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Telefonnummer2}" ToolTip="(optional) Bitte Zahlen eingeben"/>
+            <TextBox x:Name="TxTTel2" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Telefonnummer2}" ToolTip="(optional) Bitte Zahlen eingeben" BorderBrush="{Binding ColorPhone2}" TabIndex="11"/>
             <Label Content="Telefonnummer3" FontSize="16"/>
-            <TextBox x:Name="TxTTel3" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Telefonnummer3}" ToolTip="(optional) Bitte Zahlen eingeben"/>
+            <TextBox x:Name="TxTTel3" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Telefonnummer3}" ToolTip="(optional) Bitte Zahlen eingeben" BorderBrush="{Binding ColorPhone3}" TabIndex="12"/>
             <Label Content="Email-Adresse" FontSize="16"/>
-            <TextBox x:Name="TxTEmail" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Email}"/>
+            <TextBox x:Name="TxTEmail" Height="25" VerticalContentAlignment="Center" Text="{Binding Hunter.Email}" BorderBrush="{Binding ColorEmail}" TabIndex="13"/>
     </StackPanel>
-        <DataGrid ItemsSource="{Binding Testing, Mode=TwoWay}" AutoGenerateColumns="True" CanUserResizeColumns="True" Grid.Column="5" Grid.Row="1" Grid.RowSpan="4"/>
+        <!--<DataGrid ItemsSource="{Binding Testing, Mode=TwoWay}" AutoGenerateColumns="True" CanUserResizeColumns="True" Grid.Column="5" Grid.Row="1" Grid.RowSpan="4"/>-->
         <Button Grid.Column="5" Grid.Row="5" x:Name="BtnConfirm" Content="Bestätigen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Margin="0,0,90,0" Background="#FFE0CBA8" Grid.RowSpan="2" Command="{Binding ConfirmHunter}"/>
         <Button Grid.Column="5" Grid.Row="5" x:Name="BtnCancel" Content="Abbrechen" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFE0CBA8" Grid.RowSpan="2" Command="{Binding AddHunterCancel}"/>
     </Grid>

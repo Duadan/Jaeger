@@ -24,18 +24,25 @@
                 <DataGridTextColumn Binding="{Binding Nachname,Mode=OneWay}" Header="Nachname"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Column="1" Margin="5,0,0,0" ItemsSource="{Binding AppointmentAddGameListAnimal}" AutoGenerateColumns="False" CanUserResizeColumns="True" >
+        <DataGrid Grid.Column="1" Margin="5,0,0,0" ItemsSource="{Binding AppointmentAddGameListAnimal}" SelectedItem="{Binding SelectedAnimal}" AutoGenerateColumns="False" CanUserResizeColumns="True" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Tier, Mode=OneWay}" Header="Tierart"/>
                 <DataGridTextColumn Binding="{Binding Anzahl,Mode=TwoWay}" Header="Anzahl"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Column="3" ItemsSource="{Binding ListGame}">
+        <DataGrid Grid.Column="3" ItemsSource="{Binding ListGame}" SelectedItem="" CanUserResizeColumns="True" CanUserAddRows="False" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn/><!--Jäger-->
-                <DataGridTextColumn/><!--Tier-->
-                <DataGridTextColumn/><!--Datum-->
-                <DataGridCheckBoxColumn/><!--löschen Button-->
+                <DataGridTextColumn Header="Vorname" Binding="{Binding Vorname}"/><!--Jäger-->
+                <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname}"/>
+                <DataGridTextColumn Header="Tier" Binding="{Binding Tier}"/><!--Tier-->
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum.Date}"/><!--Datum-->
+                <DataGridTemplateColumn Header="Del">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Löschen" CommandParameter="{Binding ID}" Command="{Binding Path=DataContext.DelHunter, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" Height="18" Background="#ffE0cba8"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         

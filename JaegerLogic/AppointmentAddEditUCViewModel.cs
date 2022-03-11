@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CommonServiceLocator;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -23,6 +24,7 @@ namespace JaegerLogic
             {
                 DatumUhrzeit = DateTime.Today
             };
+            ColorHrs = ColorMin = ColorName = ColorPlace = "#FFABADB3";
         }
 
         #region Properties
@@ -34,7 +36,49 @@ namespace JaegerLogic
             get { return _IsEdit; }
             set { _IsEdit = value; }
         }
+        private string _ColorName;
+        public string ColorName
+        {
+            get { return _ColorName; }
+            set
+            {
+                _ColorName = value;
+                RaisePropertyChanged("ColorName");
+            }
+        }
 
+        private string _ColorPlace;
+        public string ColorPlace
+        {
+            get { return _ColorPlace; }
+            set
+            {
+                _ColorPlace = value;
+                RaisePropertyChanged("ColorPlace");
+            }
+        }
+
+        private string _ColorHrs;
+        public string ColorHrs
+        {
+            get { return _ColorHrs; }
+            set
+            {
+                _ColorHrs = value;
+                RaisePropertyChanged("ColorHrs");
+            }
+        }
+
+        private string _ColorMin;
+        public string ColorMin
+        {
+            get { return _ColorMin; }
+            set
+            {
+                _ColorMin = value;
+                RaisePropertyChanged("ColorMin");
+            }
+        }
 
         private List<string> _Role;
         public List<string> Role
@@ -142,9 +186,15 @@ namespace JaegerLogic
                             }
                             else if (IsEdit)
                             {
-                                
+                                serv.UpdateAppointment(Appointment,HunterList);
+                                Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentAddEditConfirm"));
                             }
+                            AppointmentsUCViewModel pfft = ServiceLocator.Current.GetInstance<AppointmentsUCViewModel>();
+                            pfft.Appointments = serv.GetAllAppointments();
                         }
+                        HunterAddEditUCViewModel check = new HunterAddEditUCViewModel();
+                        ColorName = check.Validate(Appointment.Bezeichnung);
+                        ColorPlace = check.Validate(Appointment.Ort);
                     });
                 }
                 return _AppointmentAddEditConfirm;

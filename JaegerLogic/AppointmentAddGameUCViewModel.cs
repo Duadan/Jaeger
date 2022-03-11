@@ -11,13 +11,13 @@ using System.Windows.Input;
 
 namespace JaegerLogic
 {
-    public class AppointmentAddGameUCViewModel:ViewModelBase,INotifyPropertyChanged
+    public class AppointmentAddGameUCViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly ServiceAddGame serv = new ServiceAddGame();
-        private readonly ServiceAnimal servA = new ServiceAnimal();
+        //private readonly ServiceAnimal servA = new ServiceAnimal();
         public AppointmentAddGameUCViewModel()
         {
-            AppointmentAddGameListHunter = serv.GetTheHunters(SelectedID);
+            AppointmentAddGameListHunter = serv.GetTheHunters(SelectedAppointmentID);
             AppointmentAddGameListAnimal = serv.GetAllAnimalsShown();
         }
 
@@ -26,8 +26,8 @@ namespace JaegerLogic
         public List<Jaeger> AppointmentAddGameListHunter
         {
             get { return _AppointmentAddGameListHunter; }
-            set 
-            { 
+            set
+            {
                 _AppointmentAddGameListHunter = value;
             }
         }
@@ -37,23 +37,24 @@ namespace JaegerLogic
         public Jaeger SelectedHunter
         {
             get { return _SelectedHunter; }
-            set 
-            { 
+            set
+            {
                 _SelectedHunter = value;
                 AppointmentAddGameListAnimal = serv.GetAllAnimalsShown();
+                ListGame = serv.GetAnimalsShot();
             }
         }
 
 
-        private int _SelectedID;
-        public int SelectedID
+        private int _SelectedAppointmentID;
+        public int SelectedAppointmentID
         {
-            get { return _SelectedID; }
+            get { return _SelectedAppointmentID; }
             set
             {
-                _SelectedID = value;
+                _SelectedAppointmentID = value;
                 AppointmentAddGameListAnimal = serv.GetAllAnimalsShown();
-                AppointmentAddGameListHunter=serv.GetTheHunters(value);
+                AppointmentAddGameListHunter = serv.GetTheHunters(value);
                 RaisePropertyChanged("SelectedID");
             }
         }
@@ -63,9 +64,9 @@ namespace JaegerLogic
         public List<AnimalShown> AppointmentAddGameListAnimal
         {
             get { return _AppointmentAddGameListAnimal; }
-            set 
-            { 
-                _AppointmentAddGameListAnimal = value; 
+            set
+            {
+                _AppointmentAddGameListAnimal = value;
             }
         }
 
@@ -81,8 +82,8 @@ namespace JaegerLogic
             }
         }
 
-        private List<string> _ListGame;
-        public List<string> ListGame
+        private List<AnimalShot> _ListGame;
+        public List<AnimalShot> ListGame
         {
             get { return _ListGame; }
             set { _ListGame = value; }
@@ -98,7 +99,10 @@ namespace JaegerLogic
                 {
                     _AddGameConfirm = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentAddGameConfirm"));
+                        serv.AddToGame(SelectedAnimal, SelectedHunter.ID, SelectedAppointmentID);
+                        ListGame = serv.GetAnimalsShot();
+                        RaisePropertyChanged("ListGame");
+                        //Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentInfoUC"));
                     });
                 }
                 return _AddGameConfirm;
