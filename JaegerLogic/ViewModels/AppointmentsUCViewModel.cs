@@ -170,7 +170,7 @@ namespace JaegerLogic
                 RaisePropertyChanged("SelectedAppointment");
             }
         }
-        private ICommand _DeleteAppointment;
+        private ICommand _DeleteAppointment; //evtl. Sprünge entfernen
         public ICommand DeleteAppointment
         {
             get

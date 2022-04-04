@@ -17,7 +17,7 @@ namespace JaegerLogic
         private readonly Service serv = new Service();
         public HunterInfoUCViewModel()
         {
-            _ExperimentalHunter = serv.GetAllHunters();
+            ExperimentalHunter = serv.GetAllHunters();
         }
 
         private Jaeger _SelectedHunter;
@@ -261,7 +261,7 @@ namespace JaegerLogic
                 {
                     _DelHunter = new RelayCommand<int>((ID) =>
                     {
-
+                        Messenger.Default.Send(new MainContentChangeMessage("AreYouSure"));//WiP (öffnet MessageBox, kann aber Result noch nicht erkennen)
                         serv.DelHunter(ID);
                         ExperimentalHunter = serv.GetAllHunters();
                         SelectedHunter = ExperimentalHunter[0];

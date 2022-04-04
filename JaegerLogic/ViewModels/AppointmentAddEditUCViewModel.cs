@@ -18,7 +18,7 @@ namespace JaegerLogic
         //private readonly Service servH = new Service();
         public AppointmentAddEditUCViewModel()
         {
-            _HunterList = serv.GetAllAppointmentHunters();
+            HunterList = serv.GetAllAppointmentHunters();
             Role = new List<string> { "Jäger", "Treiber" };
             Appointment = new Termine
             {

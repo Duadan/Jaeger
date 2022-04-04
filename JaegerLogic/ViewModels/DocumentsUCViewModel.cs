@@ -14,7 +14,7 @@ namespace JaegerLogic
     {
         public DocumentsUCViewModel()
         {
-
+            
         }
         private List<string> _ListDocuments;
         public List<string> ListDocuments
@@ -32,7 +32,7 @@ namespace JaegerLogic
                 {
                     _DocumentAdd = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("DocumentAdd"));//Dateien durchsuchen, dateipfad in DB speichern
+                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("DocumentAdd"));//TODO Dateien durchsuchen, dateipfad in DB speichern
                     });
                 }
                 return _DocumentAdd;
@@ -48,7 +48,7 @@ namespace JaegerLogic
                 {
                     _DocumentEdit = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("DocumentEdit"));//Datei über Pfad öffnen
+                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("DocumentEdit"));//TODO Datei über Pfad öffnen
                     });
                 }
                 return _DocumentEdit;

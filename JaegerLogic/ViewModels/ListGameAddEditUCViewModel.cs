@@ -14,7 +14,7 @@ namespace JaegerLogic
     {
         public ListGameAddEditUCViewModel()
         {
-
+            //TODO alles
         }
 
         private List<string> _ListGame;
@@ -25,7 +25,6 @@ namespace JaegerLogic
         }
 
         private List<DateTime> _Year;
-
         public List<DateTime> Year
         {
             get { return _Year; }

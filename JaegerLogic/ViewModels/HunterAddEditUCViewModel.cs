@@ -246,18 +246,21 @@ namespace JaegerLogic
                                 //Testing.Add(Hunter);
                                 //Testing = Testing;
                                 Hunter = new Jaeger();
+                                Messenger.Default.Send(new MainContentChangeMessage("AddSuccessShow"));
                             }
 
                             if (Edit)
                             {
                                 serv.UpdateHunter(Hunter);
                                 Hunter = new Jaeger();
+                                Messenger.Default.Send(new MainContentChangeMessage("EditSuccessShow"));
                             }
                             HunterInfoUCViewModel send = ServiceLocator.Current.GetInstance<HunterInfoUCViewModel>();
                             send.ExperimentalHunter = serv.GetAllHunters();
-                            { Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("HunterInfoUC")); }
+                            Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("HunterInfoUC"));
                         }
-                        else //Ränder färben
+                        //Ränder färben
+                        else
                         {
                             ColorFormOfAdress = Validate(Hunter.Anrede);
                             ColorLastName = Validate(Hunter.Nachname);

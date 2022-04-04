@@ -68,6 +68,15 @@ namespace JaegerUI
                     case "ListGameAddEditUC":
                         CtrlMainWindow.Content = new ListGameAddEditUC();
                         break;
+                    case "AddSuccessShow":
+                        MessageBox.Show("Erfolgreich hinzugefügt!");
+                        break;
+                    case "AreYouSure":
+                        MessageBox.Show("Sind Sie sicher?", "Wirklich?", MessageBoxButton.YesNo, MessageBoxImage.None);
+                        break;
+                    case "EditSuccessShow":
+                        MessageBox.Show("Erfolgreich geändert!");
+                        break;
                 }
 
             });

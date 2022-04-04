@@ -68,23 +68,23 @@
     <Compile Include="Abschussliste.cs">
       <DependentUpon>JaegerDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="AccidentAddUCViewModel.cs" />
-    <Compile Include="AccidentInfoUCViewModel.cs" />
-    <Compile Include="AnimalListUCViewModel.cs" />
-    <Compile Include="AppointmentAddEditUCViewModel.cs" />
-    <Compile Include="AppointmentAddGameUCViewModel.cs" />
-    <Compile Include="AppointmentCalendarUCViewModel.cs" />
-    <Compile Include="AppointmentCertificateUCViewModel.cs" />
-    <Compile Include="AppointmentInfoUCViewModel.cs" />
-    <Compile Include="AppointmentsUCViewModel.cs" />
-    <Compile Include="ChangePasswordUCViewModel.cs" />
-    <Compile Include="DocumentsUCViewModel.cs" />
+    <Compile Include="ViewModels\AccidentAddUCViewModel.cs" />
+    <Compile Include="ViewModels\AccidentInfoUCViewModel.cs" />
+    <Compile Include="ViewModels\AnimalListUCViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentAddEditUCViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentAddGameUCViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentCalendarUCViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentCertificateUCViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentInfoUCViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentsUCViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordUCViewModel.cs" />
+    <Compile Include="ViewModels\DocumentsUCViewModel.cs" />
     <Compile Include="Dokumente.cs">
       <DependentUpon>JaegerDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="HunterAddEditUCViewModel.cs" />
-    <Compile Include="HunterInfoUCViewModel.cs" />
-    <Compile Include="InvitationsUCViewModel.cs" />
+    <Compile Include="ViewModels\HunterAddEditUCViewModel.cs" />
+    <Compile Include="ViewModels\HunterInfoUCViewModel.cs" />
+    <Compile Include="ViewModels\InvitationsUCViewModel.cs" />
     <Compile Include="Jaeger.cs">
       <DependentUpon>JaegerDB.tt</DependentUpon>
     </Compile>
@@ -106,14 +106,14 @@
     <Compile Include="Jagderfolge.cs">
       <DependentUpon>JaegerDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="ListGameAddEditUCViewModel.cs" />
-    <Compile Include="ListGameUCViewModel.cs" />
+    <Compile Include="ViewModels\ListGameAddEditUCViewModel.cs" />
+    <Compile Include="ViewModels\ListGameUCViewModel.cs" />
     <Compile Include="Login.cs">
       <DependentUpon>JaegerDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="LoginUCViewModel.cs" />
+    <Compile Include="ViewModels\LoginUCViewModel.cs" />
     <Compile Include="MainContentChangeMessage.cs" />
-    <Compile Include="MainViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Partials\Jaeger.cs" />
     <Compile Include="Partials\Termine.cs" />
     <Compile Include="Passwörter.cs">
