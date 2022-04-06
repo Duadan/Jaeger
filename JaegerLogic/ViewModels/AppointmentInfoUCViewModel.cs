@@ -48,9 +48,26 @@ namespace JaegerLogic
             set
             {
                 _AppointmentChosen = serv.SelectedAppointment(SelectedID);
+                if (_AppointmentChosen.Typ == "Andere")
+                {
+                    Type = false;
+                }
+                else
+                {
+                    Type = true;
+                }
+                RaisePropertyChanged("Type");
                 RaisePropertyChanged("AppointmentChosen");
             }
         }
+
+        private bool _Type;
+        public bool Type
+        {
+            get { return _Type; }
+            set { _Type = value; }
+        }
+
 
         private bool _IsSelected;
         public bool IsSelected
@@ -110,6 +127,11 @@ namespace JaegerLogic
             set
             {
                 _SelectedHunter = value;
+                if (value != null)
+                {
+                    ListGame = serv.GetBigGame(SelectedID, SelectedHunter.ID);
+                    RaisePropertyChanged("ListGame");
+                }
                 RaisePropertyChanged("SelectedHunter");
             }
         }
@@ -118,7 +140,11 @@ namespace JaegerLogic
         public List<Game> ListGame
         {
             get { return _ListGame; }
-            set { _ListGame = value; }
+            set
+            {
+                _ListGame = value;
+                RaisePropertyChanged("ListGame");
+            }
         }
 
         #endregion
@@ -143,7 +169,7 @@ namespace JaegerLogic
                         {
                             edit.AppointmentIsHunt = true;
                         }
-                        foreach(TerminJaeger l in edit.HunterList)
+                        foreach (TerminJaeger l in edit.HunterList)
                         {
                             l.Eingeladen = false;
                             l.Rolle = null;
@@ -185,6 +211,6 @@ namespace JaegerLogic
             }
         }
 
-        
+
     }
 }

@@ -102,7 +102,7 @@ namespace JaegerLogic
                 {
                     _AppointmentShowAll = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentShowAll"));
+                        //Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentShowAll"));
                     });
                 }
                 return _AppointmentShowAll;
@@ -141,6 +141,24 @@ namespace JaegerLogic
             }
         }
 
+private ICommand _DeleteAppointment; //evtl. Sprünge entfernen
+        public ICommand DeleteAppointment
+        {
+            get
+            {
+                if (_DeleteAppointment == null)
+                {
+                    _DeleteAppointment = new RelayCommand<int>((ID) =>
+                    {
+                        serv.DelAppointment(ID);
+                        Appointments = serv.GetAllAppointments();
+                        SelectedAppointment = Appointments[0];
+                        RaisePropertyChanged("Appointments");
+                    });
+                }
+                return _DeleteAppointment;
+            }
+        }
 
         #endregion
 
@@ -168,24 +186,6 @@ namespace JaegerLogic
                 AppointmentAddGameUCViewModel bli = ServiceLocator.Current.GetInstance<AppointmentAddGameUCViewModel>();
                 bli.SelectedAppointmentID = value.ID;
                 RaisePropertyChanged("SelectedAppointment");
-            }
-        }
-        private ICommand _DeleteAppointment; //evtl. Sprünge entfernen
-        public ICommand DeleteAppointment
-        {
-            get
-            {
-                if (_DeleteAppointment == null)
-                {
-                    _DeleteAppointment = new RelayCommand<int>((ID) =>
-                    {
-                        serv.DelAppointment(ID);
-                        Appointments = serv.GetAllAppointments();
-                        SelectedAppointment = Appointments[0];
-                        RaisePropertyChanged("Appointments");
-                    });
-                }
-                return _DeleteAppointment;
             }
         }
     }

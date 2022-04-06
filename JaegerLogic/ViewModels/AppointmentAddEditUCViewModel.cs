@@ -168,14 +168,7 @@ namespace JaegerLogic
                     _AppointmentAddEditConfirm = new RelayCommand(() =>
                     {
                         Appointment.DatumUhrzeit = Appointment.DatumUhrzeit.AddHours(ChosenHour).AddMinutes(ChosenMinute);
-                        if (AppointmentIsHunt)
-                        {
-                            Appointment.Typ = "Jagd";
-                        }
-                        else
-                        {
-                            Appointment.Typ = "Andere";
-                        }
+                        Appointment.Typ = AppointmentIsHunt ? "Jagd" : "Andere";
                         if (Appointment.IsValid())
                         {
                             if (!IsEdit)

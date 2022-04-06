@@ -51,6 +51,10 @@ namespace JaegerLogic
                 {
                     if (i.Eingeladen)
                     {
+                        if (i.Rolle == null)
+                        {
+                            i.Rolle = "Gast";
+                        }
                         answer = new Rueckmeldung()
                         {
                             Gäste = i.Gaeste,
@@ -76,11 +80,11 @@ namespace JaegerLogic
                 updating.Ort = appointment.Ort;
                 updating.Typ = appointment.Typ;
                 hunt.SaveChanges();
-                
+
                 var invites = from a in hunt.Rueckmeldung
                               where a.Termin_ID == appointment.ID
                               select a;
-               
+
                 Rueckmeldung answer;
                 foreach (TerminJaeger i in appointmentHunterList.Where(hunter => hunter.Eingeladen))
                 {
@@ -239,14 +243,28 @@ namespace JaegerLogic
                                 join b in hunt.Jagderfolge
                                 on a.ID equals b.Tiere_ID
                                 where b.Termine_ID == appointmentID && b.Jaeger_ID == hunterID
-                                select new { a.Tierart };
-                List<Game> game = new List<Game>();
-                int count = 0;
+                                select new { a.Tierart, a.ID};
+                Dictionary<int, Game> game = new Dictionary<int, Game>();
+                List<Game> gameList = new List<Game>();
+                List<string> isIn = new List<string>();
+                //int count = 0;
                 foreach (var item in killcount)
                 {
-                    count++;
+                    Game currentGame = gameList.FirstOrDefault(g => g.Animal == item.Tierart);
+                    if (currentGame == null)
+                    {
+                        currentGame = new Game
+                        {
+                            Animal = item.Tierart,
+                            ID = item.ID
+                        };
+                        gameList.Add(currentGame);
+                    }
+                    currentGame.Count++;
+                    
                 }
-                return game;
+                gameList = gameList.OrderBy(g => g.Animal).ToList();
+                return gameList;
             }
         }
 
@@ -387,6 +405,8 @@ namespace JaegerLogic
 
     public partial class Game
     {
+        public int ID { get; set; }
+
         public string Animal { get; set; }
         public int Count { get; set; }
     }

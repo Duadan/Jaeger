@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="340" d:DesignWidth="800"
              DataContext="{Binding AppointmentInfoUC,Source={StaticResource Locator}}" FontFamily="Gill Sans MT">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -21,25 +24,37 @@
         </Grid.ColumnDefinitions>
         <DataGrid ItemsSource="{Binding ListHunter}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedHunter}" SelectionMode="Single" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Vorname"  Binding="{Binding Vorname, Mode=OneWay}" />
-                <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname, Mode=OneWay}" />
+                <DataGridTextColumn Header="Vorname"  Binding="{Binding Vorname, Mode=OneWay}"/>
+                <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname, Mode=OneWay}"/>
                 <DataGridTextColumn Header="Rolle" Binding="{Binding Rolle, Mode=OneWay}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="2" Grid.RowSpan="2">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel>
                 <Label Content="{Binding AppointmentChosen.Bezeichnung}" FontSize="16"/>
                 <Label Content="{Binding AppointmentChosen.Ort}" FontSize="16"/>
+                <Label Content="{Binding AppointmentChosen.Typ}" FontSize="16"/>
             </StackPanel>
-            <Label Content="Anzahl Gäste" FontSize="16"/>
-            <Label Content="{Binding CountGuests}" FontSize="16"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Anzahl Gäste" FontSize="16"/>
+                <Label Content="{Binding CountGuests}" FontSize="16"/>
+            </StackPanel>
             <Label Height="20"/>
-            <Label Content="Anzahl Jäger" FontSize="16"/>
-            <Label Content="{Binding CountHunter}" FontSize="16"/>
-            <Label Content="Anzahl Treiber" FontSize="16"/>
-            <Label Content="{Binding CountBeater}" FontSize="16"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Visibility="{Binding Path=Type, Converter={StaticResource BooleanToVisibilityConverter} }" Content="Anzahl Jäger" FontSize="16"/>
+                <Label Visibility="{Binding Path=Type, Converter={StaticResource BooleanToVisibilityConverter} }" Content="{Binding CountHunter}" FontSize="16"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Visibility="{Binding Path=Type, Converter={StaticResource BooleanToVisibilityConverter} }" Content="Anzahl Treiber" FontSize="16"/>
+                <Label Visibility="{Binding Path=Type, Converter={StaticResource BooleanToVisibilityConverter} }" Content="{Binding CountBeater}" FontSize="16"/>
+            </StackPanel>
         </StackPanel>
-        <ListBox x:Name="ListGame" Grid.Column="4"/>
+        <DataGrid ItemsSource="{Binding ListGame}" Grid.Column="4" AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tier" Binding="{Binding Animal}"/>
+                <DataGridTextColumn Header="" Binding="{Binding Count}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="BtnAddGame" Content="Hinzufügen" Grid.Column="4" Grid.Row="1" Height="30" Width="75" Background="#FFE0CBA8" Command="{Binding AppointmentInfoAddGame}"/>
         <Button x:Name="BtnEdit" Content="Bearbeiten" Grid.Column="3" Grid.Row="1" Height="30" Width="75" Background="#FFE0CBA8" Command="{Binding AppointmentInfoEdit}"/>
     </Grid>

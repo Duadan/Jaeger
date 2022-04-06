@@ -24,7 +24,7 @@ namespace JaegerUI
     {
         public AppointmentsUC()
         {
-            AppointmentInfoUC appInfoUC = new AppointmentInfoUC();
+            //AppointmentInfoUC appInfoUC = new AppointmentInfoUC();
 
             InitializeComponent();
             CtrlAppointment.Content = new AppointmentCalendarUC();
@@ -33,7 +33,9 @@ namespace JaegerUI
                 switch (message.Control)
                 {
                     case "AppointmentInfoUC":
+                        //AppointmentInfoUC appInfoUC = new AppointmentInfoUC();
                         CtrlAppointment.Content = /*appInfoUC;*/ new AppointmentInfoUC();
+                        //appInfoUC.Hunters.Visibility = appInfoUC.HunterCount.Visibility = appInfoUC.NonHunterCount.Visibility = appInfoUC.NonHunters.Visibility = Visibility.Visible;
                         break;
                     case "AppointmentAddEditUC":
                         CtrlAppointment.Content = new AppointmentAddEditUC();//ID oder so mitgeben
@@ -50,11 +52,10 @@ namespace JaegerUI
                     case "CertificateUC":
                         CtrlAppointment.Content = new AppointmentCertificateUC();
                         break;
-                    //case "AppInfo2":
-                    //    if (CtrlAppointment.Content == appInfoUC)
-                    //    {
-                    //        CtrlAppointment.Content = new AppointmentInfoUCViewModel();
-                    //    }
+                    //case "AppointmentInfoUCOther":
+                    //    appInfoUC = new AppointmentInfoUC();
+                    //    CtrlAppointment.Content = appInfoUC; //new AppointmentInfoUC();
+                    //    appInfoUC.Hunters.Visibility = appInfoUC.HunterCount.Visibility = appInfoUC.NonHunterCount.Visibility = appInfoUC.NonHunters.Visibility = Visibility.Collapsed;
                     //    break;
                 }
             });
