@@ -66,7 +66,52 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abschussliste.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dokumente.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Jaeger.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JaegerDB2.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JaegerDB2.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JaegerDB2.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JaegerDB2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JaegerDB2.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Jagderfolge.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Passwörter.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Postausgang.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Rueckmeldung.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Termine.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tiere.cs">
+      <DependentUpon>JaegerDB2.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AccidentAddUCViewModel.cs" />
     <Compile Include="ViewModels\AccidentInfoUCViewModel.cs" />
@@ -79,15 +124,9 @@
     <Compile Include="ViewModels\AppointmentsUCViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordUCViewModel.cs" />
     <Compile Include="ViewModels\DocumentsUCViewModel.cs" />
-    <Compile Include="Dokumente.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\HunterAddEditUCViewModel.cs" />
     <Compile Include="ViewModels\HunterInfoUCViewModel.cs" />
     <Compile Include="ViewModels\InvitationsUCViewModel.cs" />
-    <Compile Include="Jaeger.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="JaegerDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,42 +142,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>JaegerDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Jagderfolge.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\ListGameAddEditUCViewModel.cs" />
     <Compile Include="ViewModels\ListGameUCViewModel.cs" />
-    <Compile Include="Login.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\LoginUCViewModel.cs" />
     <Compile Include="MainContentChangeMessage.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Partials\Jaeger.cs" />
     <Compile Include="Partials\Termine.cs" />
-    <Compile Include="Passwörter.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Postausgang.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rueckmeldung.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ServiceAddGame.cs" />
     <Compile Include="Services\ServiceAnimal.cs" />
     <Compile Include="Services\ServiceAppointments.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Termine.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Tiere.cs">
-      <DependentUpon>JaegerDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModelLocator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +164,13 @@
     </EntityDeploy>
     <None Include="JaegerDB.edmx.diagram">
       <DependentUpon>JaegerDB.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="JaegerDB2.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>JaegerDB2.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="JaegerDB2.edmx.diagram">
+      <DependentUpon>JaegerDB2.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -165,6 +187,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>JaegerDB.edmx</DependentUpon>
       <LastGenOutput>JaegerDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="JaegerDB2.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JaegerDB2.edmx</DependentUpon>
+      <LastGenOutput>JaegerDB2.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="JaegerDB2.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>JaegerDB2.edmx</DependentUpon>
+      <LastGenOutput>JaegerDB2.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

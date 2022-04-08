@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="JaegerUI.AccidentInfo"
+﻿<UserControl x:Class="JaegerUI.AccidentInfoUC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,19 +10,31 @@
     <ContentControl x:Name="CtrlAccidentInfo">
         <Grid Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            <ListBox ItemsSource="{Binding}"/>
+            <DataGrid ItemsSource="{Binding AccidentInfoList,Mode=OneWay}" SelectedItem="{Binding SelectedAccident}" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding DatumUhrzeit}"/>
+                    <DataGridTextColumn Header="Ort" Binding="{Binding Ort}"/>
+                    <DataGridTextColumn Header="Kurzbeschreibung" Binding="{Binding Bezeichnung}"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <StackPanel Grid.Column="1">
                 <Label/>
-                <Label x:Name="LblPlace" Content="{Binding Place}" FontSize="16" HorizontalAlignment="Center"/>
+                <Label x:Name="LblPlace" Content="{Binding SelectedAccident.Ort}" FontSize="16" HorizontalAlignment="Center"/>
                 <Label/>
-                <Label x:Name="LblDate" Content="{Binding Date}" FontSize="16" HorizontalAlignment="Center"/>
+                <Label x:Name="LblDate" Content="{Binding SelectedAccident.DatumUhrzeit}" FontSize="16" HorizontalAlignment="Center"/>
                 <Label/>
-                <Label x:Name="LblAnimal" Content="{Binding Animal}" FontSize="16" HorizontalAlignment="Center"/>
+                <Label x:Name="LblContext" Content="{Binding SelectedAccident.Bezeichnung}" FontSize="16" HorizontalAlignment="Center"/>
             </StackPanel>
+            <DataGrid ItemsSource="{Binding Animals}" AutoGenerateColumns="False" CanUserAddRows="False" Grid.Column="2">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tier" Binding="{Binding Animal}"/>
+                    <DataGridTextColumn Header="Anzahl" Binding="{Binding AnimalCount}"/>
+                </DataGrid.Columns>
+            </DataGrid>
             <Button x:Name="BtnAdd" Content="Unfall eintragen" Width="90" Height="30" VerticalAlignment="Bottom" Grid.Column="1" Background="#FFE0CBA8" Command="{Binding AccidentInfoAdd}"/>
         </Grid>
     </ContentControl>

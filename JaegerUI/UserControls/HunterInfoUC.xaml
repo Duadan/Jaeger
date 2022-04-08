@@ -19,7 +19,7 @@
             <RowDefinition/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="LBHunter" Grid.Row="0" Grid.Column="0" Loaded="LBHunter_Loaded" AutoGenerateColumns="False" CanUserResizeColumns="True" 
+        <DataGrid x:Name="LBHunter" Grid.Row="0" Grid.Column="0" AutoGenerateColumns="False" CanUserResizeColumns="True" 
             ItemsSource="{Binding ExperimentalHunter, Mode=TwoWay}"
                   SelectedItem="{Binding SelectedHunter, Mode=TwoWay}" CanUserAddRows="False" SelectionMode="Single">
             <!---->

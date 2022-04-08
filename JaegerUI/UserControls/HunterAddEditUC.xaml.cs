@@ -25,9 +25,5 @@ namespace JaegerUI
             InitializeComponent();
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

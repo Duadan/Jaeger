@@ -26,10 +26,5 @@ namespace JaegerUI
         {
             InitializeComponent();
         }
-
-        private void LBHunter_Loaded(object sender, RoutedEventArgs e)
-        {
-            Messenger.Default.Send<string>("LBHunterLoaded");
-        }
     }
 }

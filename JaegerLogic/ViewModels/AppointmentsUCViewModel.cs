@@ -102,7 +102,8 @@ namespace JaegerLogic
                 {
                     _AppointmentShowAll = new RelayCommand(() =>
                     {
-                        //Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentShowAll"));
+                        Appointments = serv.GetAllAppointments();
+                        RaisePropertyChanged("Appointments");
                     });
                 }
                 return _AppointmentShowAll;
@@ -118,7 +119,8 @@ namespace JaegerLogic
                 {
                     _AppointmentShowHunt = new RelayCommand(() =>
                     {
-                        //Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentShowHunt"));
+                        Appointments = serv.GetTypeOfAppointments("Jagd");
+                        RaisePropertyChanged("Appointments");
                     });
                 }
                 return _AppointmentShowHunt;
@@ -134,7 +136,8 @@ namespace JaegerLogic
                 {
                     _AppointmentShowOther = new RelayCommand(() =>
                     {
-                        //Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentShowOther"));
+                        Appointments = serv.GetTypeOfAppointments("Andere");
+                        RaisePropertyChanged("Appointments");
                     });
                 }
                 return _AppointmentShowOther;
@@ -170,7 +173,7 @@ private ICommand _DeleteAppointment; //evtl. Sprünge entfernen
         }
 
         private Termine _SelectedAppointment;
-        public Termine SelectedAppointment
+        public Termine SelectedAppointment //hat Problem ausgelöst
         {
             get { return _SelectedAppointment; }
             set

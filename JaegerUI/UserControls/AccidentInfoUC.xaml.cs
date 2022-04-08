@@ -18,16 +18,11 @@ namespace JaegerUI
     /// <summary>
     /// Interaktionslogik für AccidentInfo.xaml
     /// </summary>
-    public partial class AccidentInfo : UserControl
+    public partial class AccidentInfoUC : UserControl
     {
-        public AccidentInfo()
+        public AccidentInfoUC()
         {
             InitializeComponent();
-        }
-
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            CtrlAccidentInfo.Content = new AccidentAddUC();
         }
     }
 }

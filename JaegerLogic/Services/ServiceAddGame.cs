@@ -35,12 +35,12 @@ namespace JaegerLogic
         {
             using (JaegerDB hunt = new JaegerDB())
             {
-                for (int i = 0; i < selectedAnimal.Anzahl; i++)
+                for (int i = 0; i < selectedAnimal.AnimalCount; i++)
                 {
                     Jagderfolge kills = new Jagderfolge
                     {
                         Jaeger_ID = selectedHunterID,
-                        Tiere_ID = selectedAnimal.TierID,
+                        Tiere_ID = selectedAnimal.AnimalID,
                         Termine_ID = selectedAppointmentID
                     };
                     hunt.Jagderfolge.Add(kills);
@@ -60,9 +60,9 @@ namespace JaegerLogic
                 {
                     animals.Add(new AnimalShown
                     {
-                        TierID = b.ID,
-                        Tier = b.Tierart,
-                        Anzahl=0
+                        AnimalID = b.ID,
+                        Animal = b.Tierart,
+                        AnimalCount=0
                     });
                 }
                 return animals;
@@ -80,7 +80,7 @@ namespace JaegerLogic
                                on a.Tiere_ID equals c.ID
                                join d in hunt.Jaeger
                                on a.Jaeger_ID equals d.ID
-                               select new { b.DatumUhrzeit, c.Tierart, d.Vorname, d.Nachname };
+                               select new { b.DatumUhrzeit, c.Tierart,c.ID, d.Vorname, d.Nachname };
                 List<AnimalShot> shots = new List<AnimalShot>();
                 foreach(var i in killList)
                 {
@@ -88,6 +88,7 @@ namespace JaegerLogic
                     {
                         Vorname = i.Vorname,
                         Nachname = i.Nachname,
+                        TierID=i.ID,
                         Tier = i.Tierart,
                         Datum = i.DatumUhrzeit
                     });
@@ -96,12 +97,106 @@ namespace JaegerLogic
             }
         }
 
+        public List<AnimalShown> GetAppointmentGame(int appointmentID)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                var killcount = from a in hunt.Tiere
+                                join b in hunt.Jagderfolge
+                                on a.ID equals b.Tiere_ID
+                                where b.Termine_ID == appointmentID
+                                select new { a.Tierart, a.ID };
+                Dictionary<int, AnimalShown> game = new Dictionary<int, AnimalShown>();
+                List<AnimalShown> gameList = new List<AnimalShown>();
+                List<string> isIn = new List<string>();
+                //int count = 0;
+                foreach (var item in killcount)
+                {
+                    AnimalShown currentGame = gameList.FirstOrDefault(g => g.Animal == item.Tierart);
+                    if (currentGame == null)
+                    {
+                        currentGame = new AnimalShown
+                        {
+                            Animal = item.Tierart,
+                            AnimalID = item.ID
+                        };
+                        gameList.Add(currentGame);
+                    }
+                    currentGame.AnimalCount++;
+
+                }
+                gameList = gameList.OrderBy(g => g.Animal).ToList();
+                return gameList;
+            }
+        }
+
+        #region Accident
+        public void InsertAccident(Termine accidentToAdd, List<AnimalShown> animalCount)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+
+                hunt.Termine.Add(accidentToAdd);
+                hunt.SaveChanges();
+                foreach (AnimalShown a in animalCount)
+                {
+                    AddToGame(a, 0, accidentToAdd.ID);
+                }
+            }
+        }
+
+        public List<AnimalShown> GetAllAccidents()
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                var killcount = from a in hunt.Tiere
+                                join b in hunt.Jagderfolge
+                                on a.ID equals b.Tiere_ID
+                                where b.Termine.Typ=="Unfall"
+                                select new { a.Tierart, a.ID };
+                Dictionary<int, AnimalShown> game = new Dictionary<int, AnimalShown>();
+                List<AnimalShown> gameList = new List<AnimalShown>();
+                //int count = 0;
+                foreach (var item in killcount)
+                {
+                    AnimalShown currentGame = gameList.FirstOrDefault(g => g.Animal == item.Tierart);
+                    if (currentGame == null)
+                    {
+                        currentGame = new AnimalShown
+                        {
+                            Animal = item.Tierart,
+                            AnimalID = item.ID
+                        };
+                        gameList.Add(currentGame);
+                    }
+                    currentGame.AnimalCount++;
+
+                }
+                gameList = gameList.OrderBy(g => g.Animal).ToList();
+                return gameList;
+            }
+        }
+
+        public List<Termine> GetAccidents()
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                var termine = from a in hunt.Termine
+                              where a.Typ == "Unfall"
+                              select a;
+                List<Termine> appointment = termine.ToList();
+                return appointment;
+            }
+        }
+
+        #endregion
+
     }
     public class AnimalShown
     {
-        public int TierID { get; set; }
-        public int Anzahl { get; set; }
-        public string Tier { get; set; }
+        public int AnimalID { get; set; }
+        public int AnimalCount { get; set; }
+        public string Animal { get; set; }
     }
 
     public class AnimalShot
@@ -109,6 +204,8 @@ namespace JaegerLogic
         public string Vorname { get; set; }
 
         public string Nachname { get; set; }
+
+        public int TierID { get; set; }
 
         public string Tier { get; set; }
 

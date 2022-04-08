@@ -13,9 +13,9 @@ namespace JaegerLogic
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class JaegerDB : DbContext
+    public partial class JaegerDB2 : DbContext
     {
-        public JaegerDB()
+        public JaegerDB2()
             : base("name=JaegerTestOSEntities")
         {
         }

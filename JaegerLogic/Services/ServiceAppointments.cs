@@ -14,6 +14,19 @@ namespace JaegerLogic
             using (JaegerDB hunt = new JaegerDB())
             {
                 var termine = from a in hunt.Termine
+                              where a.Typ !="Unfall"
+                              select a;
+                List<Termine> appointment = termine.ToList();
+                return appointment;
+            }
+        }
+
+        public List<Termine> GetTypeOfAppointments(string type)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                var termine = from a in hunt.Termine
+                              where a.Typ == type
                               select a;
                 List<Termine> appointment = termine.ToList();
                 return appointment;
@@ -235,7 +248,7 @@ namespace JaegerLogic
             }
         }
         //WiP
-        public List<Game> GetBigGame(int appointmentID, int hunterID)
+        public List<AnimalShown> GetBigGame(int appointmentID, int hunterID)
         {
             using (JaegerDB hunt = new JaegerDB())
             {
@@ -244,24 +257,89 @@ namespace JaegerLogic
                                 on a.ID equals b.Tiere_ID
                                 where b.Termine_ID == appointmentID && b.Jaeger_ID == hunterID
                                 select new { a.Tierart, a.ID};
-                Dictionary<int, Game> game = new Dictionary<int, Game>();
-                List<Game> gameList = new List<Game>();
+                Dictionary<int, AnimalShown> game = new Dictionary<int, AnimalShown>();
+                List<AnimalShown> gameList = new List<AnimalShown>();
                 List<string> isIn = new List<string>();
                 //int count = 0;
                 foreach (var item in killcount)
                 {
-                    Game currentGame = gameList.FirstOrDefault(g => g.Animal == item.Tierart);
+                    AnimalShown currentGame = gameList.FirstOrDefault(g => g.Animal == item.Tierart);
                     if (currentGame == null)
                     {
-                        currentGame = new Game
+                        currentGame = new AnimalShown
                         {
                             Animal = item.Tierart,
-                            ID = item.ID
+                            AnimalID = item.ID
                         };
                         gameList.Add(currentGame);
                     }
-                    currentGame.Count++;
+                    currentGame.AnimalCount++;
                     
+                }
+                gameList = gameList.OrderBy(g => g.Animal).ToList();
+                return gameList;
+            }
+        }
+
+        public List<AnimalShown> GetAppointedGame(int appointmentID)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                var killcount = from a in hunt.Tiere
+                                join b in hunt.Jagderfolge
+                                on a.ID equals b.Tiere_ID
+                                where b.Termine_ID == appointmentID
+                                select new { a.Tierart, a.ID };
+                Dictionary<int, AnimalShown> game = new Dictionary<int, AnimalShown>();
+                List<AnimalShown> gameList = new List<AnimalShown>();
+                //int count = 0;
+                foreach (var item in killcount)
+                {
+                    AnimalShown currentGame = gameList.FirstOrDefault(g => g.Animal == item.Tierart);
+                    if (currentGame == null)
+                    {
+                        currentGame = new AnimalShown
+                        {
+                            Animal = item.Tierart,
+                            AnimalID = item.ID
+                        };
+                        gameList.Add(currentGame);
+                    }
+                    currentGame.AnimalCount++;
+
+                }
+                gameList = gameList.OrderBy(g => g.Animal).ToList();
+                return gameList;
+            }
+        }
+
+        public List<AnimalShown> GetAppointmentGame(int appointmentID)
+        {
+            using (JaegerDB hunt = new JaegerDB())
+            {
+                var killcount = from a in hunt.Tiere
+                                join b in hunt.Jagderfolge
+                                on a.ID equals b.Tiere_ID
+                                where b.Termine_ID == appointmentID
+                                select new { a.Tierart, a.ID };
+                Dictionary<int, AnimalShown> game = new Dictionary<int, AnimalShown>();
+                List<AnimalShown> gameList = new List<AnimalShown>();
+                List<string> isIn = new List<string>();
+                //int count = 0;
+                foreach (var item in killcount)
+                {
+                    AnimalShown currentGame = gameList.FirstOrDefault(g => g.Animal == item.Tierart);
+                    if (currentGame == null)
+                    {
+                        currentGame = new AnimalShown
+                        {
+                            Animal = item.Tierart,
+                            AnimalID = item.ID
+                        };
+                        gameList.Add(currentGame);
+                    }
+                    currentGame.AnimalCount++;
+
                 }
                 gameList = gameList.OrderBy(g => g.Animal).ToList();
                 return gameList;
@@ -403,13 +481,7 @@ namespace JaegerLogic
         public int Gaeste { get; set; }
     }
 
-    public partial class Game
-    {
-        public int ID { get; set; }
-
-        public string Animal { get; set; }
-        public int Count { get; set; }
-    }
+    
 
     public class HunterInvited
     {

@@ -132,12 +132,17 @@ namespace JaegerLogic
                     ListGame = serv.GetBigGame(SelectedID, SelectedHunter.ID);
                     RaisePropertyChanged("ListGame");
                 }
+                else
+                {
+                    ListGame = serv.GetAppointedGame(SelectedID);
+                    RaisePropertyChanged("ListGame");
+                }
                 RaisePropertyChanged("SelectedHunter");
             }
         }
 
-        private List<Game> _ListGame;
-        public List<Game> ListGame
+        private List<AnimalShown> _ListGame;
+        public List<AnimalShown> ListGame
         {
             get { return _ListGame; }
             set
@@ -202,9 +207,7 @@ namespace JaegerLogic
                 {
                     _AppointmentInfoAddGame = new RelayCommand(() =>
                     {
-                        //AppointmentAddEditUCViewModel edit = ServiceLocator.Current.GetInstance<AppointmentAddEditUCViewModel>();
-                        //edit.IsEdit = true;
-                        //Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentAddGameUC"));
+                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentAddGameUC"));
                     });
                 }
                 return _AppointmentInfoAddGame;

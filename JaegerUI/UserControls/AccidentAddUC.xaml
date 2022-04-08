@@ -10,31 +10,45 @@
     <ContentControl x:Name="CtrlAccidentAdd">
         <Grid Margin="5">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid ItemsSource="{Binding AccidentList, Mode=TwoWay}"><!--?two?way?-->
+            <DataGrid ItemsSource="{Binding AnimalList}" AutoGenerateColumns="False" CanUserAddRows="False"><!--?two?way?-->
                 <DataGrid.Columns>
-                    <DataGridTextColumn/>
-                    <DataGridTextColumn/>
-                    <DataGridTextColumn/>
+                    <DataGridTextColumn Header="Tier" Binding="{Binding Animal}"/>
+                    <DataGridTextColumn Header="Anzahl" Binding="{Binding AnimalCount}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid Grid.Column="2" ItemsSource="{Binding AccidentList}" CanUserAddRows="False" AutoGenerateColumns="False" Margin="0,0,0,42">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ort" Binding="{Binding Ort}"/>
+                    <DataGridTextColumn Header="Datum" Binding="{Binding DatumUhrzeit}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Löschen" Command="{Binding Path=DataContext.AccidentDelete, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Grid.Column="1" Margin="30,0,0,0">
                 <Label Content="Ort" FontSize="16"/>
-                <TextBox x:Name="TxtPlace" Width="125" Height="25" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Place,Mode=TwoWay}"/>
+                <TextBox x:Name="TxtPlace" Width="125" Height="25" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Accident.Ort, Mode=TwoWay}" ToolTip="Der Ort, an dem der Unfall geschehen ist"/>
                 <Label Content="Datum" FontSize="16"/>
-                <DatePicker x:Name="DPAccident" Height="25" Width="125" HorizontalAlignment="Left" VerticalContentAlignment="Center" Text="{Binding Date, Mode=TwoWay}"/>
+                <DatePicker x:Name="DPAccident" Height="25" Width="125" HorizontalAlignment="Left" VerticalContentAlignment="Center" DisplayDate="{Binding Accident.DatumUhrzeit, Mode=TwoWay}" ToolTip="Zeitpunkt des Unfalls"/>
                 <Label Content="Uhrzeit" FontSize="16"/>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="CBHrs" Height="25" Width="60" VerticalContentAlignment="Center" Text="{Binding Hrs, Mode=TwoWay}"/>
+                    <ComboBox x:Name="CBHrs" Height="25" Width="60" VerticalContentAlignment="Center" ItemsSource="{Binding Hrs, Mode=TwoWay}" SelectedItem="{Binding ChosenHour}"/>
                     <Label Width="5"/>
-                    <ComboBox x:Name="CBMin" Height="25" Width="60" VerticalContentAlignment="Center" Text="{Binding Minutes, Mode=TwoWay}"/>
+                    <ComboBox x:Name="CBMin" Height="25" Width="60" VerticalContentAlignment="Center" ItemsSource="{Binding Minutes, Mode=TwoWay}" SelectedItem="{Binding ChosenMinute}"/>
                 </StackPanel>
+                <Label Content="Bezeichnung (Optional)"/>
+                <TextBox Text="{Binding Accident.Bezeichnung}" ToolTip="hier bei Bedarf kurze Beschreibung, oder Namensvergabe (max. 50 Zeichen)"/>
             </StackPanel>
             <Button x:Name="BtnConfirm" Content="Bestätigen" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFe0CBA8" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,90,0" Command="{Binding AccidentAddConfirm}"/>
-            <Button x:Name="BtnCancel" Content="Abbrechen" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFe0CBA8" Grid.Column="2" HorizontalAlignment="Right" Click="BtnCancel_Click" Command="{Binding AccidentAddCancel}"/>
+            <Button x:Name="BtnCancel" Content="Abbrechen" VerticalAlignment="Bottom" Width="75" Height="30" Background="#FFe0CBA8" Grid.Column="2" HorizontalAlignment="Right" Command="{Binding AccidentAddCancel}"/>
         </Grid>
     </ContentControl>
 </UserControl>

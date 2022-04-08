@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce46f78377d347fdae8cfd1ff604d466" Name="Diagram1">
+        <EntityTypeShape EntityType="JaegerDB2.Abschussliste" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Dokumente" Width="1.5" PointX="3.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Jaeger" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Jagderfolge" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Login" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Passwörter" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Postausgang" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Rueckmeldung" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.sysdiagrams" Width="1.5" PointX="5.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Termine" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="JaegerDB2.Tiere" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="JaegerDB2.FK_Abschussliste_Tiere" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Postausgang_Dokumente" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Jagderfolge_Jaeger" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Postausgang_Jaeger" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Rueckmeldung_Jaeger" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Jagderfolge_Termine" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Jagderfolge_Tiere" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Postausgang_Termine" ManuallyRouted="false" />
+        <AssociationConnector Association="JaegerDB2.FK_Rueckmeldung_Termine" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

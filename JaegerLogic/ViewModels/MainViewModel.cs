@@ -111,7 +111,7 @@ namespace JaegerUI.ViewModel
                 {
                     _AccidentInfo = new RelayCommand(() =>
                     {
-                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AccidentInfo"));
+                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AccidentInfoUC"));
 
                     });
                 }

@@ -13,30 +13,23 @@ namespace JaegerLogic
 {
     public class AccidentInfoUCViewModel:ViewModelBase,INotifyPropertyChanged
     {
+        private ServiceAddGame serv = new ServiceAddGame();
         public AccidentInfoUCViewModel()
         {
-
+            AccidentInfoList = serv.GetAccidents();
+            Animals = serv.GetAllAccidents();
         }
 
-        private string _Place;
-        public string Place
+        private Termine _SelectedAccident;
+        public Termine SelectedAccident
         {
-            get { return _Place; }
-            set { _Place = value; }
-        }
-
-        private string _Date;
-        public string Date
-        {
-            get { return _Date; }
-            set { _Date = value; }
-        }
-
-        private string _Animal;
-        public string Animal
-        {
-            get { return _Animal; }
-            set { _Animal = value; }
+            get { return _SelectedAccident; }
+            set 
+            { 
+                _SelectedAccident = value;
+                RaisePropertyChanged("Animals");
+                RaisePropertyChanged("SelectedAccident");
+            }
         }
 
         private ICommand _AccidentInfoAdd;
@@ -55,8 +48,16 @@ namespace JaegerLogic
             }
         }
 
-        private List<string> _AccidentInfoList;//DB anbinden
-        public List<string> AccidentInfoList
+        private List<AnimalShown> _Animals;
+        public List<AnimalShown> Animals
+        {
+            get { return _Animals; }
+            set { _Animals = value; }
+        }
+
+
+        private List<Termine> _AccidentInfoList;//DB anbinden
+        public List<Termine> AccidentInfoList
         {
             get { return _AccidentInfoList; }
             set { _AccidentInfoList = value; }

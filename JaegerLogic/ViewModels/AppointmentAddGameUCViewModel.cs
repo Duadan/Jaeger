@@ -19,6 +19,7 @@ namespace JaegerLogic
         {
             AppointmentAddGameListHunter = serv.GetTheHunters(SelectedAppointmentID);
             AppointmentAddGameListAnimal = serv.GetAllAnimalsShown();
+            ListGame = serv.GetAnimalsShot();
         }
 
         #region Properties
@@ -102,7 +103,7 @@ namespace JaegerLogic
                         serv.AddToGame(SelectedAnimal, SelectedHunter.ID, SelectedAppointmentID);
                         ListGame = serv.GetAnimalsShot();
                         RaisePropertyChanged("ListGame");
-                        //Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AppointmentInfoUC"));
+                        Messenger.Default.Send<MainContentChangeMessage>(new MainContentChangeMessage("AddSuccessShow"));
                     });
                 }
                 return _AddGameConfirm;

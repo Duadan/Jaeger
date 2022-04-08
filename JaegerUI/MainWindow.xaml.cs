@@ -42,8 +42,8 @@ namespace JaegerUI
                     case "ListGameUC":
                         CtrlMainWindow.Content = new ListGameUC();
                         break;
-                    case "AccidentInfo":
-                        CtrlMainWindow.Content = new AccidentInfo();
+                    case "AccidentInfoUC":
+                        CtrlMainWindow.Content = new AccidentInfoUC();
                         break;
                     case "AnimalListUC":
                         CtrlMainWindow.Content = new AnimalListUC();
@@ -76,6 +76,9 @@ namespace JaegerUI
                         break;
                     case "EditSuccessShow":
                         MessageBox.Show("Erfolgreich geändert!");
+                        break;
+                    case "FailedInputShow":
+                        MessageBox.Show("hat nicht geklappt :(", "Fehler");
                         break;
                 }
 

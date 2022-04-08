@@ -1,0 +1,780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JaegerDB2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abschussliste">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tiere_ID" Type="int" Nullable="false" />
+          <Property Name="Jahr" Type="datetime" Nullable="false" />
+          <Property Name="Anzahl" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dokumente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bezeichnung" Type="varchar" MaxLength="150" />
+          <Property Name="Vorlage" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Jaeger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vorname" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Nachname" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Anrede" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ort" Type="varchar" MaxLength="150" />
+          <Property Name="PLZ" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Straße" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Hausnummer" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adresszusatz" Type="varchar" MaxLength="150" />
+          <Property Name="Telefonnummer1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefonnummer2" Type="varchar" MaxLength="50" />
+          <Property Name="Telefonnummer3" Type="varchar" MaxLength="50" />
+          <Property Name="Funktion" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Geburtsdatum" Type="date" />
+        </EntityType>
+        <EntityType Name="Jagderfolge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Jaeger_ID" Type="int" Nullable="false" />
+          <Property Name="Termine_ID" Type="int" Nullable="false" />
+          <Property Name="Tiere_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Loginname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passwort" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Passwörter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Loginname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passwort" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Postausgang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dokumente_ID" Type="int" Nullable="false" />
+          <Property Name="Jaeger_ID" Type="int" Nullable="false" />
+          <Property Name="Termine_ID" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rueckmeldung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rolle" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gäste" Type="int" Nullable="false" />
+          <Property Name="Termin_ID" Type="int" Nullable="false" />
+          <Property Name="Jaeger_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Termine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Typ" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DatumUhrzeit" Type="datetime" Nullable="false" />
+          <Property Name="Ort" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Bezeichnung" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tiere">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tierart" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Abschussliste_Tiere">
+          <End Role="Tiere" Type="Self.Tiere" Multiplicity="1" />
+          <End Role="Abschussliste" Type="Self.Abschussliste" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tiere">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Abschussliste">
+              <PropertyRef Name="Tiere_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jagderfolge_Jaeger">
+          <End Role="Jaeger" Type="Self.Jaeger" Multiplicity="1" />
+          <End Role="Jagderfolge" Type="Self.Jagderfolge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jaeger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jagderfolge">
+              <PropertyRef Name="Jaeger_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jagderfolge_Termine">
+          <End Role="Termine" Type="Self.Termine" Multiplicity="1" />
+          <End Role="Jagderfolge" Type="Self.Jagderfolge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jagderfolge">
+              <PropertyRef Name="Termine_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jagderfolge_Tiere">
+          <End Role="Tiere" Type="Self.Tiere" Multiplicity="1" />
+          <End Role="Jagderfolge" Type="Self.Jagderfolge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tiere">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jagderfolge">
+              <PropertyRef Name="Tiere_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postausgang_Dokumente">
+          <End Role="Dokumente" Type="Self.Dokumente" Multiplicity="1" />
+          <End Role="Postausgang" Type="Self.Postausgang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dokumente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Postausgang">
+              <PropertyRef Name="Dokumente_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postausgang_Jaeger">
+          <End Role="Jaeger" Type="Self.Jaeger" Multiplicity="1" />
+          <End Role="Postausgang" Type="Self.Postausgang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jaeger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Postausgang">
+              <PropertyRef Name="Jaeger_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postausgang_Termine">
+          <End Role="Termine" Type="Self.Termine" Multiplicity="1" />
+          <End Role="Postausgang" Type="Self.Postausgang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Postausgang">
+              <PropertyRef Name="Termine_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rueckmeldung_Jaeger">
+          <End Role="Jaeger" Type="Self.Jaeger" Multiplicity="1" />
+          <End Role="Rueckmeldung" Type="Self.Rueckmeldung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jaeger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rueckmeldung">
+              <PropertyRef Name="Jaeger_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rueckmeldung_Termine">
+          <End Role="Termine" Type="Self.Termine" Multiplicity="1" />
+          <End Role="Rueckmeldung" Type="Self.Rueckmeldung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rueckmeldung">
+              <PropertyRef Name="Termin_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="JaegerDB2StoreContainer">
+          <EntitySet Name="Abschussliste" EntityType="Self.Abschussliste" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dokumente" EntityType="Self.Dokumente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jaeger" EntityType="Self.Jaeger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jagderfolge" EntityType="Self.Jagderfolge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passwörter" EntityType="Self.Passwörter" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postausgang" EntityType="Self.Postausgang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rueckmeldung" EntityType="Self.Rueckmeldung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Termine" EntityType="Self.Termine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tiere" EntityType="Self.Tiere" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Abschussliste_Tiere" Association="Self.FK_Abschussliste_Tiere">
+            <End Role="Tiere" EntitySet="Tiere" />
+            <End Role="Abschussliste" EntitySet="Abschussliste" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jagderfolge_Jaeger" Association="Self.FK_Jagderfolge_Jaeger">
+            <End Role="Jaeger" EntitySet="Jaeger" />
+            <End Role="Jagderfolge" EntitySet="Jagderfolge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jagderfolge_Termine" Association="Self.FK_Jagderfolge_Termine">
+            <End Role="Termine" EntitySet="Termine" />
+            <End Role="Jagderfolge" EntitySet="Jagderfolge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jagderfolge_Tiere" Association="Self.FK_Jagderfolge_Tiere">
+            <End Role="Tiere" EntitySet="Tiere" />
+            <End Role="Jagderfolge" EntitySet="Jagderfolge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postausgang_Dokumente" Association="Self.FK_Postausgang_Dokumente">
+            <End Role="Dokumente" EntitySet="Dokumente" />
+            <End Role="Postausgang" EntitySet="Postausgang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postausgang_Jaeger" Association="Self.FK_Postausgang_Jaeger">
+            <End Role="Jaeger" EntitySet="Jaeger" />
+            <End Role="Postausgang" EntitySet="Postausgang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postausgang_Termine" Association="Self.FK_Postausgang_Termine">
+            <End Role="Termine" EntitySet="Termine" />
+            <End Role="Postausgang" EntitySet="Postausgang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rueckmeldung_Jaeger" Association="Self.FK_Rueckmeldung_Jaeger">
+            <End Role="Jaeger" EntitySet="Jaeger" />
+            <End Role="Rueckmeldung" EntitySet="Rueckmeldung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rueckmeldung_Termine" Association="Self.FK_Rueckmeldung_Termine">
+            <End Role="Termine" EntitySet="Termine" />
+            <End Role="Rueckmeldung" EntitySet="Rueckmeldung" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JaegerDB2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Abschussliste">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tiere_ID" Type="Int32" Nullable="false" />
+          <Property Name="Jahr" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Anzahl" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tiere" Relationship="Self.FK_Abschussliste_Tiere" FromRole="Abschussliste" ToRole="Tiere" />
+        </EntityType>
+        <EntityType Name="Dokumente">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Vorlage" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Postausgang" Relationship="Self.FK_Postausgang_Dokumente" FromRole="Dokumente" ToRole="Postausgang" />
+        </EntityType>
+        <EntityType Name="Jaeger">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vorname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nachname" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Anrede" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ort" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PLZ" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Straße" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Hausnummer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresszusatz" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Telefonnummer1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefonnummer2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefonnummer3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Funktion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Geburtsdatum" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Jagderfolge" Relationship="Self.FK_Jagderfolge_Jaeger" FromRole="Jaeger" ToRole="Jagderfolge" />
+          <NavigationProperty Name="Postausgang" Relationship="Self.FK_Postausgang_Jaeger" FromRole="Jaeger" ToRole="Postausgang" />
+          <NavigationProperty Name="Rueckmeldung" Relationship="Self.FK_Rueckmeldung_Jaeger" FromRole="Jaeger" ToRole="Rueckmeldung" />
+        </EntityType>
+        <EntityType Name="Jagderfolge">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Jaeger_ID" Type="Int32" Nullable="false" />
+          <Property Name="Termine_ID" Type="Int32" Nullable="false" />
+          <Property Name="Tiere_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Jaeger" Relationship="Self.FK_Jagderfolge_Jaeger" FromRole="Jagderfolge" ToRole="Jaeger" />
+          <NavigationProperty Name="Termine" Relationship="Self.FK_Jagderfolge_Termine" FromRole="Jagderfolge" ToRole="Termine" />
+          <NavigationProperty Name="Tiere" Relationship="Self.FK_Jagderfolge_Tiere" FromRole="Jagderfolge" ToRole="Tiere" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Loginname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Passwort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Passwörter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Loginname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Passwort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Postausgang">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dokumente_ID" Type="Int32" Nullable="false" />
+          <Property Name="Jaeger_ID" Type="Int32" Nullable="false" />
+          <Property Name="Termine_ID" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Dokumente" Relationship="Self.FK_Postausgang_Dokumente" FromRole="Postausgang" ToRole="Dokumente" />
+          <NavigationProperty Name="Jaeger" Relationship="Self.FK_Postausgang_Jaeger" FromRole="Postausgang" ToRole="Jaeger" />
+          <NavigationProperty Name="Termine" Relationship="Self.FK_Postausgang_Termine" FromRole="Postausgang" ToRole="Termine" />
+        </EntityType>
+        <EntityType Name="Rueckmeldung">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rolle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gäste" Type="Int32" Nullable="false" />
+          <Property Name="Termin_ID" Type="Int32" Nullable="false" />
+          <Property Name="Jaeger_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Jaeger" Relationship="Self.FK_Rueckmeldung_Jaeger" FromRole="Rueckmeldung" ToRole="Jaeger" />
+          <NavigationProperty Name="Termine" Relationship="Self.FK_Rueckmeldung_Termine" FromRole="Rueckmeldung" ToRole="Termine" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Termine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Typ" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DatumUhrzeit" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ort" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Bezeichnung" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Jagderfolge" Relationship="Self.FK_Jagderfolge_Termine" FromRole="Termine" ToRole="Jagderfolge" />
+          <NavigationProperty Name="Postausgang" Relationship="Self.FK_Postausgang_Termine" FromRole="Termine" ToRole="Postausgang" />
+          <NavigationProperty Name="Rueckmeldung" Relationship="Self.FK_Rueckmeldung_Termine" FromRole="Termine" ToRole="Rueckmeldung" />
+        </EntityType>
+        <EntityType Name="Tiere">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tierart" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Abschussliste" Relationship="Self.FK_Abschussliste_Tiere" FromRole="Tiere" ToRole="Abschussliste" />
+          <NavigationProperty Name="Jagderfolge" Relationship="Self.FK_Jagderfolge_Tiere" FromRole="Tiere" ToRole="Jagderfolge" />
+        </EntityType>
+        <Association Name="FK_Abschussliste_Tiere">
+          <End Role="Tiere" Type="Self.Tiere" Multiplicity="1" />
+          <End Role="Abschussliste" Type="Self.Abschussliste" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tiere">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Abschussliste">
+              <PropertyRef Name="Tiere_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postausgang_Dokumente">
+          <End Role="Dokumente" Type="Self.Dokumente" Multiplicity="1" />
+          <End Role="Postausgang" Type="Self.Postausgang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dokumente">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Postausgang">
+              <PropertyRef Name="Dokumente_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jagderfolge_Jaeger">
+          <End Role="Jaeger" Type="Self.Jaeger" Multiplicity="1" />
+          <End Role="Jagderfolge" Type="Self.Jagderfolge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jaeger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jagderfolge">
+              <PropertyRef Name="Jaeger_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postausgang_Jaeger">
+          <End Role="Jaeger" Type="Self.Jaeger" Multiplicity="1" />
+          <End Role="Postausgang" Type="Self.Postausgang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jaeger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Postausgang">
+              <PropertyRef Name="Jaeger_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rueckmeldung_Jaeger">
+          <End Role="Jaeger" Type="Self.Jaeger" Multiplicity="1" />
+          <End Role="Rueckmeldung" Type="Self.Rueckmeldung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jaeger">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rueckmeldung">
+              <PropertyRef Name="Jaeger_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jagderfolge_Termine">
+          <End Role="Termine" Type="Self.Termine" Multiplicity="1" />
+          <End Role="Jagderfolge" Type="Self.Jagderfolge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jagderfolge">
+              <PropertyRef Name="Termine_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jagderfolge_Tiere">
+          <End Role="Tiere" Type="Self.Tiere" Multiplicity="1" />
+          <End Role="Jagderfolge" Type="Self.Jagderfolge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tiere">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Jagderfolge">
+              <PropertyRef Name="Tiere_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Postausgang_Termine">
+          <End Role="Termine" Type="Self.Termine" Multiplicity="1" />
+          <End Role="Postausgang" Type="Self.Postausgang" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Postausgang">
+              <PropertyRef Name="Termine_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rueckmeldung_Termine">
+          <End Role="Termine" Type="Self.Termine" Multiplicity="1" />
+          <End Role="Rueckmeldung" Type="Self.Rueckmeldung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Termine">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Rueckmeldung">
+              <PropertyRef Name="Termin_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JaegerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abschussliste" EntityType="Self.Abschussliste" />
+          <EntitySet Name="Dokumente" EntityType="Self.Dokumente" />
+          <EntitySet Name="Jaeger" EntityType="Self.Jaeger" />
+          <EntitySet Name="Jagderfolge" EntityType="Self.Jagderfolge" />
+          <EntitySet Name="Login" EntityType="Self.Login" />
+          <EntitySet Name="Passwörter" EntityType="Self.Passwörter" />
+          <EntitySet Name="Postausgang" EntityType="Self.Postausgang" />
+          <EntitySet Name="Rueckmeldung" EntityType="Self.Rueckmeldung" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Termine" EntityType="Self.Termine" />
+          <EntitySet Name="Tiere" EntityType="Self.Tiere" />
+          <AssociationSet Name="FK_Abschussliste_Tiere" Association="Self.FK_Abschussliste_Tiere">
+            <End Role="Tiere" EntitySet="Tiere" />
+            <End Role="Abschussliste" EntitySet="Abschussliste" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postausgang_Dokumente" Association="Self.FK_Postausgang_Dokumente">
+            <End Role="Dokumente" EntitySet="Dokumente" />
+            <End Role="Postausgang" EntitySet="Postausgang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jagderfolge_Jaeger" Association="Self.FK_Jagderfolge_Jaeger">
+            <End Role="Jaeger" EntitySet="Jaeger" />
+            <End Role="Jagderfolge" EntitySet="Jagderfolge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postausgang_Jaeger" Association="Self.FK_Postausgang_Jaeger">
+            <End Role="Jaeger" EntitySet="Jaeger" />
+            <End Role="Postausgang" EntitySet="Postausgang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rueckmeldung_Jaeger" Association="Self.FK_Rueckmeldung_Jaeger">
+            <End Role="Jaeger" EntitySet="Jaeger" />
+            <End Role="Rueckmeldung" EntitySet="Rueckmeldung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jagderfolge_Termine" Association="Self.FK_Jagderfolge_Termine">
+            <End Role="Termine" EntitySet="Termine" />
+            <End Role="Jagderfolge" EntitySet="Jagderfolge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jagderfolge_Tiere" Association="Self.FK_Jagderfolge_Tiere">
+            <End Role="Tiere" EntitySet="Tiere" />
+            <End Role="Jagderfolge" EntitySet="Jagderfolge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Postausgang_Termine" Association="Self.FK_Postausgang_Termine">
+            <End Role="Termine" EntitySet="Termine" />
+            <End Role="Postausgang" EntitySet="Postausgang" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rueckmeldung_Termine" Association="Self.FK_Rueckmeldung_Termine">
+            <End Role="Termine" EntitySet="Termine" />
+            <End Role="Rueckmeldung" EntitySet="Rueckmeldung" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JaegerDB2StoreContainer" CdmEntityContainer="JaegerEntities">
+          <EntitySetMapping Name="Abschussliste">
+            <EntityTypeMapping TypeName="JaegerDB2.Abschussliste">
+              <MappingFragment StoreEntitySet="Abschussliste">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tiere_ID" ColumnName="Tiere_ID" />
+                <ScalarProperty Name="Jahr" ColumnName="Jahr" />
+                <ScalarProperty Name="Anzahl" ColumnName="Anzahl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dokumente">
+            <EntityTypeMapping TypeName="JaegerDB2.Dokumente">
+              <MappingFragment StoreEntitySet="Dokumente">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+                <ScalarProperty Name="Vorlage" ColumnName="Vorlage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jaeger">
+            <EntityTypeMapping TypeName="JaegerDB2.Jaeger">
+              <MappingFragment StoreEntitySet="Jaeger">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Vorname" ColumnName="Vorname" />
+                <ScalarProperty Name="Nachname" ColumnName="Nachname" />
+                <ScalarProperty Name="Anrede" ColumnName="Anrede" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+                <ScalarProperty Name="Straße" ColumnName="Straße" />
+                <ScalarProperty Name="Hausnummer" ColumnName="Hausnummer" />
+                <ScalarProperty Name="Adresszusatz" ColumnName="Adresszusatz" />
+                <ScalarProperty Name="Telefonnummer1" ColumnName="Telefonnummer1" />
+                <ScalarProperty Name="Telefonnummer2" ColumnName="Telefonnummer2" />
+                <ScalarProperty Name="Telefonnummer3" ColumnName="Telefonnummer3" />
+                <ScalarProperty Name="Funktion" ColumnName="Funktion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Geburtsdatum" ColumnName="Geburtsdatum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jagderfolge">
+            <EntityTypeMapping TypeName="JaegerDB2.Jagderfolge">
+              <MappingFragment StoreEntitySet="Jagderfolge">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Jaeger_ID" ColumnName="Jaeger_ID" />
+                <ScalarProperty Name="Termine_ID" ColumnName="Termine_ID" />
+                <ScalarProperty Name="Tiere_ID" ColumnName="Tiere_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="JaegerDB2.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Loginname" ColumnName="Loginname" />
+                <ScalarProperty Name="Passwort" ColumnName="Passwort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passwörter">
+            <EntityTypeMapping TypeName="JaegerDB2.Passwörter">
+              <MappingFragment StoreEntitySet="Passwörter">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Loginname" ColumnName="Loginname" />
+                <ScalarProperty Name="Passwort" ColumnName="Passwort" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postausgang">
+            <EntityTypeMapping TypeName="JaegerDB2.Postausgang">
+              <MappingFragment StoreEntitySet="Postausgang">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Dokumente_ID" ColumnName="Dokumente_ID" />
+                <ScalarProperty Name="Jaeger_ID" ColumnName="Jaeger_ID" />
+                <ScalarProperty Name="Termine_ID" ColumnName="Termine_ID" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rueckmeldung">
+            <EntityTypeMapping TypeName="JaegerDB2.Rueckmeldung">
+              <MappingFragment StoreEntitySet="Rueckmeldung">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Rolle" ColumnName="Rolle" />
+                <ScalarProperty Name="Gäste" ColumnName="Gäste" />
+                <ScalarProperty Name="Termin_ID" ColumnName="Termin_ID" />
+                <ScalarProperty Name="Jaeger_ID" ColumnName="Jaeger_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="JaegerDB2.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Termine">
+            <EntityTypeMapping TypeName="JaegerDB2.Termine">
+              <MappingFragment StoreEntitySet="Termine">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Typ" ColumnName="Typ" />
+                <ScalarProperty Name="DatumUhrzeit" ColumnName="DatumUhrzeit" />
+                <ScalarProperty Name="Ort" ColumnName="Ort" />
+                <ScalarProperty Name="Bezeichnung" ColumnName="Bezeichnung" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tiere">
+            <EntityTypeMapping TypeName="JaegerDB2.Tiere">
+              <MappingFragment StoreEntitySet="Tiere">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tierart" ColumnName="Tierart" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="JaegerDB2.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="JaegerDB2.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="JaegerDB2.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="JaegerDB2.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="JaegerDB2.Store.sp_helpdiagrams" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="JaegerDB2.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="JaegerDB2.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Kein" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
